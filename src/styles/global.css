@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply font-normal text-blueZ;
+}
+
+body {
+  @apply bg-white font-roboto;
+}
+
+p {
+  @apply text-blueZ;
+}
+
+.sarath {
+  @apply text-yellow-500;
+}
+
+.animation-hover:after {
+  background: none repeat scroll 0 0 transparent;
+  content: '';
+  height: 2px;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  @apply w-0 bg-accent left-1/2 block bottom-0 absolute;
+}
+.animation-active:after {
+  @apply left-0 w-full;
+}
+.animation-hover:hover:after {
+  @apply left-0 w-full;
+}
+
+li.custom-list:before {
+  content: '\2022'; /* bullet point, for screen readers */
+  text-indent: -9999999px; /* move the bullet point out of sight */
+
+  width: 0.4em;
+  height: 1em;
+  background-repeat: no-repeat;
+
+  background-size: 0.4em 0.7em;
+  background-position: 0 0.3em;
+  font-size: 300%;
+  top: -0.35em;
+  @apply absolute block;
+}
+li.circle-check:before {
+  background-image: url('/assets/Icon/checklist.svg');
+  left: -0.7em;
+  top: -0.4em;
+}
+li.check:before {
+  left: -0.5em;
+  background-image: url('/assets/Icon/jam_check.svg');
+  top: -0.5em;
+  font-size: 400%;
+}
+/* Slideshow */
+.slick-dots li {
+  @apply inline-block;
+}
+.slick-dots span {
+  @apply bg-gray-500;
+}
+.slick-dots .slick-active span {
+  @apply bg-accent rounded-l-full rounded-r-full w-12;
+}
+
+.navbar-nav {
+  @apply text-center md:text-left flex-[0_0_100%] lg:flex-auto;
+}
+
+.nav-item {
+  @apply mx-3;
+}
+
+.nav-link {
+  @apply p-3 font-medium transition lg:py-4 xl:px-3;
+
+  &.active {
+    /* @apply text-white; */
+  }
+}
+
+.nav-dropdown {
+  @apply mr-0;
+}
+
+.nav-dropdown-list {
+  @apply z-10 rounded-lg bg-white px-2.5 w-[220px] lg:shadow-sm;
+}
+
+.nav-dropdown-item {
+  @apply mb-1;
+}
+
+.nav-dropdown-link {
+  @apply min-w-[150px] py-2.5 text-sm font-medium text-blueZ transition lg:hover:text-white whitespace-nowrap lg:hover:bg-accent px-4 rounded-lg;
+
+  &.active {
+    @apply lg:bg-accent text-white;
+  }
+}
+/* swiper pagination */
+
+/* .mySwiperMain  */
+
+.mySwiperMain {
+  @apply w-screen h-[30dvh] md:h-[65dvh] min-h-[350px];
+}
+
+.mySwiperFacility {
+  @apply w-full h-[30dvh] md:h-[30dvh] min-h-[250px];
+}
+
+.mySwiperEvents {
+  @apply w-full h-[30dvh] md:h-[40dvh] min-h-[430px] max-w-6xl;
+}
+
+.swiper-slide img {
+  @apply block w-full h-full object-cover;
+}
+
+.swiper-slide {
+  font-size: 18px;
+  background: #fff;
+  color: #000;
+
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.swiper-slide img {
+  @apply block w-full h-full object-cover;
+}
+
+.service-carousel .swiper-pagination {
+  @apply flex justify-center mt-2 gap-2;
+
+  span {
+    @apply mx-[5px] inline-block h-[10px] w-[10px] cursor-pointer rounded-full border border-accent;
+    &.swiper-pagination-bullet-active {
+      @apply bg-accent;
+    }
+  }
+}
+
+.mySwiperEvents .swiper-slide img {
+  @apply h-60 w-full object-cover sm:h-60 lg:h-60 rounded-md;
+}
+
+.service-carousel .mySwiperEvents .swiper-pagination {
+  @apply flex justify-center relative bottom-5 gap-2 z-40;
+
+  span {
+    @apply mx-[5px] inline-block h-[10px] w-[10px] cursor-pointer rounded-full border border-accent;
+    &.swiper-pagination-bullet-active {
+      @apply bg-accent;
+    }
+  }
+}
+
+.mySwiperEvents .swiper-wrapper {
+  @apply !w-[calc(100vw-2rem)]  md:!w-full max-w-6xl;
+}
+
+.mySwiperEvents .swiper {
+  @apply overflow-hidden md:w-full h-full;
+}
+
+.mySwiperEvents .swiper-slide {
+  @apply block w-full sm:w-1/2 md:w-1/3;
+}
+
+.paginate {
+  @apply hidden md:flex;
+}
+
+.mySwiperNews .swiper-slide {
+  @apply w-full h-full;
+}
+
+.mySwiperNews .swiper-wrapper {
+  @apply h-60;
+}
+
+/* card css */
+
+.card-hover {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate))
+    skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x))
+    scaleY(var(--tw-scale-y));
+  border-width: 1px;
+  border-color: transparent;
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow,
+    transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color,
+    -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.4s;
+}
+.card-hover:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(98 91 247 / var(--tw-border-opacity));
+  --tw-shadow: rgba(0, 228, 255, 0.986) 0px 4px 24px;
+  --tw-shadow-colored: 0px 4px 24px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000),
+    var(--tw-shadow);
+}
+
+.highlight {
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 5%);
+}
