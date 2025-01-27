@@ -1,11 +1,11 @@
 export default function Features() {
   return (
-    <section id='features' className='py-20 bg-gradient-to-t from-[#524790] to-[#8c79ed]'>
+    <section id='features' className='py-20 bg-gradient-to-t to-violet-950 from-cyan-700 '>
       <div className='mx-8 max-w-7xl md:mx-10 lg:mx-20 xl:mx-auto'>
         <div className='space-y-16 md:space-y-24'>
           <div className='transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100'>
             <div className='space-y-5 md:text-center'>
-              <div className='inline-block rounded-lg bg-[#302953] bg-opacity-60 px-3 py-1 text-sm font-semibold text-indigo-100 hover:cursor-pointer hover:bg-opacity-40'>
+              <div className='inline-block rounded-lg bg-cyan-900 bg-opacity-60 px-3 py-1 text-sm font-semibold text-indigo-100 hover:cursor-pointer hover:bg-opacity-40'>
                 Awesome Features
               </div>
               <h1 className='text-3xl font-semibold text-gray-100 md:text-5xl'>

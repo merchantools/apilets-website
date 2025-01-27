@@ -11,6 +11,10 @@ export default function Landing() {
               apilets is a place where you can find innovative ideas, innovations, apps, and
               projects.
             </h2>
+            <h2 className='text-lg text-gray-100 md:text-2xl md:mx-10 md:text-gray-600'>
+              apilets is a place where you can find innovative ideas, innovations, apps, and
+              projects.
+            </h2>
           </div>
           {/* <div className='transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100'>
             <div className='space-y-2'>
@@ -43,7 +47,7 @@ export default function Landing() {
           <a target='_blank' rel='noreferrer' href='https://godly.website'>
             <img
               className='transition duration-700 shadow-xl rounded-xl ring-1 ring-black ring-opacity-5 hover:transform hover:scale-105'
-              src='images/product.png'
+              src='/product.png'
               alt='Product Image'
             />
           </a>
@@ -58,13 +62,29 @@ export default function Landing() {
         </h1>
         <div className='w-3/5 p-6 mx-auto bg-gray-100 rounded-2xl bg-opacity-70 md:bg-opacity-100 md:p-10'>
           <div className='flex flex-wrap items-center justify-center flex-shrink -mt-6 -ml-6 space-x-6 space-y-6'>
-            <img className='h-5 mt-6 ml-6 md:h-8' src='images/stripe.svg' alt='' />
-            <img className='h-7 md:h-5' src='images/stockx.png' alt='' />
-            <img className='h-9 md:h-6' src='images/openai.png' alt='' />
-            <img className='h-5 md:h-8' src='images/moderna.png' alt='' />
-            <img className='h-5 md:h-5' src='images/oracle.png' alt='' />
-            <img className='h-5 md:h-9' src='images/honey.png' alt='' />
-            <img className='h-5 md:h-8' src='images/digitalocean.svg' alt='' />
+            {/* <img className='h-5 mt-6 ml-6 md:h-8' src='partnerLogos/stripe.svg' alt='' />
+            <img className='h-7 md:h-5' src='partnerLogos/stockx.png' alt='' /> */}
+            <img
+              className='h-7 mt-6 ml-6 md:h-10'
+              src='partnerLogos/commercetools-logo.svg'
+              alt=''
+            />
+            <img className='h-5 md:h-8' src='partnerLogos/AWS.png' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/klaviyo.svg' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/shopify.svg' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/sap-hybris-logo.png' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/dotdigital.svg' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/emarsys-logo.png' alt='' />
+            <img className='h-9 md:h-6' src='partnerLogos/openai.png' alt='' />
+
+            <img className='h-5 md:h-8' src='partnerLogos/digitalocean.svg' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/sendgrid.svg' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/Microsoft_Azure.png' alt='' />
+            <img className='h-5 md:h-8' src='partnerLogos/Triquestra-Logo.png' alt='' />
+
+            {/* <img className='h-5 md:h-8' src='partnerLogos/moderna.png' alt='' />
+            <img className='h-5 md:h-5' src='partnerLogos/oracle.png' alt='' />
+            <img className='h-5 md:h-9' src='partnerLogos/honey.png' alt='' /> */}
           </div>
         </div>
       </div>

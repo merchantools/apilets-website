@@ -18,7 +18,7 @@ export default function Action() {
 
   return (
     <div className='max-w-full md:mx-10 lg:mx-20 xl:mx-auto'>
-      <div className='px-10 shadow-2xl py-14 md:py-32 md:text-center bg-[radial-gradient(circle,_theme(colors.emerald.500)_21%,_theme(colors.sky.500)_67%)]'>
+      <div className='px-10 shadow-2xl py-14 md:py-32 md:text-center bg-[radial-gradient(circle,_theme(colors.emerald.400)_21%,_theme(colors.sky.400)_67%)]'>
         <h1 className='mb-6 text-3xl flex justify-center font-semibold text-center text-white md:text-6xl'>
           <p className='mr-2'>Transform your</p>
           <TypewriterEffectLoop words={words} />
