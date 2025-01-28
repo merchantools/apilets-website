@@ -5,11 +5,10 @@ export default function Landing() {
         <div className='my-20 space-y-10 text-center sm:my-16 md:space-y-14'>
           <div className='space-y-5 md:space-y-8'>
             <h1 className='text-3xl font-semibold text-white sm:text-5xl md:text-6xl md:text-gray-800'>
-              Welcome to apilets.
+              modernize your retail business
             </h1>
             <h2 className='text-lg text-gray-100 md:text-2xl md:mx-10 md:text-gray-600'>
-              apilets is a place where you can find innovative ideas, innovations, apps, and
-              projects.
+              apilets is your expert.
             </h2>
             <h2 className='text-lg text-gray-100 md:text-2xl md:mx-10 md:text-gray-600'>
               apilets is a place where you can find innovative ideas, innovations, apps, and
@@ -58,7 +57,7 @@ export default function Landing() {
       </div>
       <div className='mt-20 space-y-6 text-center mb-28 md:mt-32'>
         <h1 className='text-lg font-semibold tracking-wide text-center text-gray-100 text-opacity-75 uppercase md:mx-10 md:text-gray-600'>
-          Trusted by industry leaders
+          We compose your technology stack. We are your expert.
         </h1>
         <div className='w-3/5 p-6 mx-auto bg-gray-100 rounded-2xl bg-opacity-70 md:bg-opacity-100 md:p-10'>
           <div className='flex flex-wrap items-center justify-center flex-shrink -mt-6 -ml-6 space-x-6 space-y-6'>
@@ -73,15 +72,10 @@ export default function Landing() {
             <img className='h-5 md:h-8' src='partnerLogos/klaviyo.svg' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/shopify.svg' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/sap-hybris-logo.png' alt='' />
-            <img className='h-5 md:h-8' src='partnerLogos/dotdigital.svg' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/emarsys-logo.png' alt='' />
             <img className='h-9 md:h-6' src='partnerLogos/openai.png' alt='' />
-
-            <img className='h-5 md:h-8' src='partnerLogos/digitalocean.svg' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/sendgrid.svg' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/Microsoft_Azure.png' alt='' />
-            <img className='h-5 md:h-8' src='partnerLogos/Triquestra-Logo.png' alt='' />
-
             {/* <img className='h-5 md:h-8' src='partnerLogos/moderna.png' alt='' />
             <img className='h-5 md:h-5' src='partnerLogos/oracle.png' alt='' />
             <img className='h-5 md:h-9' src='partnerLogos/honey.png' alt='' /> */}
