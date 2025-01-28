@@ -46,14 +46,14 @@ export default function RootLayout({
           <div className='h-full leading-normal text-gray-600'>
             <div
               className='absolute top-0 left-0 right-0  shadow-lg -bottom-full  md:bottom-0  -z-10
-            bg-gradient-to-br  from-purple-400 from-30% via-cyan-400 via-50% to-pink-400 to-80% animate-gradient bg-[length:400%_400%] bg-opacity-10'
+            bg-gradient-to-br  from-purple-200 from-30% via-cyan-200 via-50% to-pink-200 to-80% animate-gradient bg-[length:400%_400%] bg-opacity-10'
               style={{
                 animation: 'gradient 8s ease infinite',
               }}
             />
             <div
               className='absolute top-0 left-0 right-0  md:bottom-0 -z-30 bg-opacity-30
-            bg-gradient-to-tr from-purple-400 from-30%  via-cyan-400 via-50% to-pink-400 to-80% animate-gradient bg-[length:500%_500%] '
+            bg-gradient-to-tr from-purple-200 from-30%  via-cyan-200 via-50% to-pink-200 to-80% animate-gradient bg-[length:500%_500%] '
               style={{
                 animation: 'gradient 8s ease infinite',
               }}

@@ -428,30 +428,38 @@ export default function Header() {
             <ul className='flex flex-wrap items-center justify-end flex-grow gap-2 pr-4 space-x-2 md:gap-6 md:space-x-6'>
               <li>
                 <a
-                  href='#features'
+                  href='#who'
                   className='text-lg text-white md:text-black hover:text-gray-300 md:hover:text-gray-700'>
-                  Features
+                  Who We Are
                 </a>
               </li>
-              {/* <li>
+              <li>
                 <a
-                  href='#demo'
+                  href='#what'
                   className='text-lg text-white md:text-black hover:text-gray-300 md:hover:text-gray-700'>
-                  Demo
+                  What We Do
                 </a>
               </li>
+              <li>
+                <a
+                  href='#partners'
+                  className='text-lg text-white md:text-black hover:text-gray-300 md:hover:text-gray-700'>
+                  Our Accelerators
+                </a>
+              </li>
+              {/* 
               <li>
                 <a
                   href='/'
                   className='text-lg text-white md:text-black hover:text-gray-300 md:hover:text-gray-700'>
                   Sign in
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a
                   href='/'
                   className='bg-white rounded-full bg-opacity-40 px-4 text-lg text-white md:text-black shadow-sm transition-colors duration-75 group gap-[0.25em] inline-flex items-center py-1.5 hover:cursor-pointer hover:bg-opacity-90'>
-                  Sign up
+                  Get in touch
                   <svg
                     viewBox='0 0 16 16'
                     height='1em'
@@ -470,7 +478,7 @@ export default function Header() {
                       className='origin-left transition-all duration-200 opacity-0 motion-safe:-translate-x-1 group-hover:translate-x-0 group-hover:opacity-100'></path>
                   </svg>
                 </a>
-              </li> */}
+              </li>
             </ul>
           </div>
         </div>
