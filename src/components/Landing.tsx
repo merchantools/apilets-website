@@ -5,14 +5,10 @@ export default function Landing() {
         <div className='my-20 space-y-10 text-center sm:my-16 md:space-y-14'>
           <div className='space-y-5 md:space-y-8'>
             <h1 className='text-3xl font-semibold text-white sm:text-5xl md:text-6xl md:text-gray-800'>
-              modernize your retail business
+              MACH at mach speed
             </h1>
             <h2 className='text-lg text-gray-100 md:text-2xl md:mx-10 md:text-gray-600'>
-              apilets is your expert.
-            </h2>
-            <h2 className='text-lg text-gray-100 md:text-2xl md:mx-10 md:text-gray-600'>
-              apilets is a place where you can find innovative ideas, innovations, apps, and
-              projects.
+              we are your composable commerce expert.
             </h2>
           </div>
           {/* <div className='transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100'>

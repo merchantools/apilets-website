@@ -35,10 +35,9 @@ export default function RootLayout({
         <Head>
           <title>APILETS – Software Solutions</title>
           <meta content='Example' name='description' />
-          <meta property='og:url' content='example.com' />
-          <meta property='og:description' content='Example' />
-          <meta property='og:title' content='Example' />
-          <meta property='og:image' content='' />
+          <meta property='og:url' content='apilets.com' />
+          <meta property='og:description' content='Software solutions' />
+          <meta property='og:title' content='MACH at MACH speed' />
           <link rel='shortcut icon' href='/favicon.png' />
         </Head>
 
