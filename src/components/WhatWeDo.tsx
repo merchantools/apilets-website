@@ -1,84 +1,74 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { contentService, ContentItem } from '@/services/contentService';
+import { ServiceContent } from '@/services/contentServiceContext';
 import { StickyScroll } from './stickyScroll';
 
-import Image from 'next/image';
-
-const content = [
-  {
-    title: 'Custom Software Development',
-    description:
-      'We specialize in crafting tailored software solutions to meet your unique business needs. From concept to deployment, we deliver scalable, efficient, and innovative applications that drive success.',
-    content: (
-      <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.blue.500),theme(colors.indigo.500))] flex items-center justify-center text-white'>
-        <span className='text-lg md:text-xl lg:text-2xl'>Custom Software Development</span>
-      </div>
-    ),
-  },
-  {
-    title: 'Cloud',
-    description:
-      'Seamlessly integrate your business processes with cloud technologies. Our expertise ensures secure, reliable, and scalable solutions that optimize your operations and improve accessibility.',
-    content: (
-      <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.green.500),theme(colors.teal.500))] flex items-center justify-center text-white'>
-        <span className='text-lg md:text-xl lg:text-2xl'>Cloud Integration</span>
-      </div>
-    ),
-  },
-  {
-    title: 'UI/UX Design',
-    description:
-      'Delivering intuitive, visually appealing, and user-centric designs is our forte. We create interfaces that enhance user engagement, ensuring an unforgettable experience for your customers.',
-    content: (
-      <div className='h-full w-full flex items-center justify-center text-white bg-[linear-gradient(to_bottom_right,theme(colors.blue.400),theme(colors.purple.500))] md:bg-transparent'>
-        <span className='block md:hidden text-lg'>UI/UX Design</span>
-        <Image
-          src='/product.png'
-          width={300}
-          height={300}
-          className='hidden md:block h-full w-full object-cover'
-          alt='UI/UX Design'
-        />
-      </div>
-    ),
-  },
-  {
-    title: 'AI and Automation',
-    description:
-      'Transform your business with AI-driven solutions and automation. Our services help you harness the power of artificial intelligence to improve decision-making, reduce manual tasks, and boost efficiency.',
-    content: (
-      <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.purple.500),theme(colors.pink.500))] flex items-center justify-center text-white'>
-        AI and Automation
-      </div>
-    ),
-  },
-  {
-    title: 'Data Analytics and Insights',
-    description:
-      'Unlock the potential of your data with our advanced analytics services. Gain actionable insights to make informed decisions and stay ahead in your industry.',
-    content: (
-      <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.orange.500),theme(colors.yellow.500))] flex items-center justify-center text-white'>
-        Data Analytics and Insights
-      </div>
-    ),
-  },
-  {
-    title: '24/7 Technical Support',
-    description:
-      'We provide round-the-clock technical support to ensure your systems are always up and running. Our dedicated team is here to resolve issues promptly and minimize downtime.',
-    content: (
-      <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.red.500),theme(colors.rose.500))] flex items-center justify-center text-white'>
-        24/7 Technical Support
-      </div>
-    ),
-  },
-];
-
 export function WhatWeDo() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [services, setServices] = useState<ContentItem[]>([]);
+
+  useEffect(() => {
+    const loadServices = async () => {
+      const data = await contentService.getServices();
+      setServices(data);
+    };
+    loadServices();
+  }, []);
+
+  useEffect(() => {
+    if (services.length === 0) return;
+
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === services.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [services]);
+
+  if (services.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <section id='demo' className='py-32 bg-opacity-90 bg-gray-900'>
-      <div className='max-w-3xl lg:max-w-7xl mx-auto '>
-        <StickyScroll content={content} />
+    <section id='demo' className='py-5 bg-opacity-90 bg-gray-900'>
+      <div className='max-w-5xl mx-auto px-4'>
+        <div className='relative overflow-hidden'>
+          <div 
+            className='flex transition-transform duration-500 ease-in-out'
+            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+          >
+            {services.map((item, index) => (
+              <div 
+                key={index}
+                className='w-full flex-shrink-0 flex flex-col items-center space-y-4'
+              >
+                <div className='w-full aspect-video relative'>
+                  <ServiceContent item={item} />
+                </div>
+                <div className='text-center max-w-3xl mx-auto'>
+                  <h3 className='text-xl font-bold text-white mb-2'>{item.title}</h3>
+                  <p className='text-gray-300'>{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className='flex justify-center mt-4 space-x-2'>
+            {services.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full ${
+                  currentIndex === index ? 'bg-white' : 'bg-gray-600'
+                }`}
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

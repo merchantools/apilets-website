@@ -7,8 +7,8 @@ export default function Landing() {
   return (
     <section className="min-h-screen py-20">
       <div className="max-w-3xl mx-8 md:mx-auto">
-        <div className="my-20 space-y-10 text-center sm:my-16 md:space-y-14">
-          <div className="space-y-5 md:space-y-8">
+        <div className="my-10 space-y-6 text-center sm:my-8 md:space-y-8">
+          <div className="space-y-3 md:space-y-4">
             <h1 className="text-3xl font-semibold text-black sm:text-5xl md:text-6xl md:text-gray-800">
               apilets <TypeAnimation
                 sequence={[
@@ -32,22 +32,8 @@ export default function Landing() {
           </div>
         </div>
       </div>
-      <div className='relative w-full px-4 text-center sm:px-0 md:mx-auto md:my-12 md:w-3/5'>
-        <div className='relative z-10'>
-          {/* <a target='_blank' rel='noreferrer' href='https://godly.website'>
-            <img
-              className='transition duration-700 shadow-xl rounded-xl ring-1 ring-black ring-opacity-5 hover:transform hover:scale-105'
-              src='/product.png'
-              alt='Product Image'
-            />
-          </a> */}
-        </div>
-        {/* <p className="z-10 my-8 text-sm font-medium text-gray-500">
-              Caption if needed
-            </p> */}
-      </div>
       <WhatWeDo />
-      <div id='partners' className='mt-20 space-y-6 text-center mb-28 md:mt-32'>
+      <div id='partners' className='mt-10 space-y-4 text-center mb-20 md:mt-16'>
         <h1 className='text-lg font-semibold tracking-wide text-center text-gray-100 text-opacity-75 uppercase md:mx-10 md:text-gray-600'>
           Trusted by industry leaders
         </h1>
