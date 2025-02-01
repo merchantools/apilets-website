@@ -11,17 +11,17 @@ const content = [
       'We specialize in crafting tailored software solutions to meet your unique business needs. From concept to deployment, we deliver scalable, efficient, and innovative applications that drive success.',
     content: (
       <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.blue.500),theme(colors.indigo.500))] flex items-center justify-center text-white'>
-        Custom Software Development
+        <span className='text-lg md:text-xl lg:text-2xl'>Custom Software Development</span>
       </div>
     ),
   },
   {
-    title: 'Cloud Integration',
+    title: 'Cloud',
     description:
       'Seamlessly integrate your business processes with cloud technologies. Our expertise ensures secure, reliable, and scalable solutions that optimize your operations and improve accessibility.',
     content: (
       <div className='h-full w-full bg-[linear-gradient(to_bottom_right,theme(colors.green.500),theme(colors.teal.500))] flex items-center justify-center text-white'>
-        Cloud Integration
+        <span className='text-lg md:text-xl lg:text-2xl'>Cloud Integration</span>
       </div>
     ),
   },
@@ -30,12 +30,13 @@ const content = [
     description:
       'Delivering intuitive, visually appealing, and user-centric designs is our forte. We create interfaces that enhance user engagement, ensuring an unforgettable experience for your customers.',
     content: (
-      <div className='h-full w-full flex items-center justify-center text-white'>
+      <div className='h-full w-full flex items-center justify-center text-white bg-[linear-gradient(to_bottom_right,theme(colors.blue.400),theme(colors.purple.500))] md:bg-transparent'>
+        <span className='block md:hidden text-lg'>UI/UX Design</span>
         <Image
           src='/product.png'
           width={300}
           height={300}
-          className='h-full w-full object-cover'
+          className='hidden md:block h-full w-full object-cover'
           alt='UI/UX Design'
         />
       </div>
@@ -75,7 +76,7 @@ const content = [
 
 export function WhatWeDo() {
   return (
-    <section id='demo' className='py-20 bg-opacity-90 bg-gray-900'>
+    <section id='demo' className='py-32 bg-opacity-90 bg-gray-900'>
       <div className='max-w-3xl lg:max-w-7xl mx-auto '>
         <StickyScroll content={content} />
       </div>
