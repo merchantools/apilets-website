@@ -31,22 +31,22 @@ class ContentService {
             `,
             imageUrl: '/ecom-marketing-01.png',
       },
-    //     {
-    //     title: 'Custom Software Development',
-    //     description:
-    //       'We specialize in crafting tailored software solutions to meet your unique business needs. From concept to deployment, we deliver scalable, efficient, and innovative applications that drive success.',
-    //       content: `<div className='h-full w-full flex items-center justify-center text-white bg-[linear-gradient(to_bottom_right,theme(colors.blue.400),theme(colors.purple.500))] md:bg-transparent'>
-    //       <span className='block md:hidden text-lg'>UI/UX Design</span>
-    //       <Image
-    //       src='/product.png'
-    //       width={300}
-    //       height={300}
-    //       className='hidden md:block h-full w-full object-cover'
-    //       alt='UI/UX Design'
-    //       />
-    //       </div>`,
-    //     imageUrl: '/product.png',
-    //   },
+        {
+        title: 'Custom Software Development',
+        description:
+            'We specialize in crafting tailored software solutions to meet your unique business needs. From concept to deployment, we deliver scalable, efficient, and innovative applications that drive success.',
+            content: `<div className='h-full w-full flex items-center justify-center text-white bg-[linear-gradient(to_bottom_right,theme(colors.blue.400),theme(colors.purple.500))] md:bg-transparent'>
+            <span className='block md:hidden text-lg'>UI/UX Design</span>
+            <Image
+            src='/product.png'
+            width={300}
+            height={300}
+            className='hidden md:block h-full w-full object-cover'
+            alt='UI/UX Design'
+            />
+            </div>`,
+        imageUrl: '/product.png',
+        }
     //   {
     //     title: 'Cloud',
     //     description:

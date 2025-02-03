@@ -9,6 +9,18 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      'primary': '#393a72',    // Dark Blue/Purple
+      'secondary': '#a6a465',  // Sage Green
+      'accent': '#f8c811',     // Yellow
+      'highlight': '#6061ad',  // Purple
+      'base': '#fcfcfc',      // White
+      blueZ: '#393a72',
+    },
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif'],
+      blueZ: ['#393a72', 'sans-serif'],
+    },
     accentColor: ({ theme }) => ({
       ...theme('colors'),
       auto: 'auto',

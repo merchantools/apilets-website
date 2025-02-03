@@ -33,11 +33,11 @@ export function WhatWeDo() {
   }
 
   return (
-    <section id='demo' className='py-5 bg-opacity-90 bg-gray-900'>
-      <div className='max-w-5xl mx-auto px-4'>
+    <div className='py-5 bg-opacity-90 bg-primary w-full md:w-4/5 w-70 mx-auto md:rounded-xl rounded-sm'>
+      <div className='max-w-7xl mx-auto px-4'>
         <div className='relative overflow-hidden'>
           <div 
-            className='flex transition-transform duration-500 ease-in-out'
+            className='flex transition-transform duration-700 ease-in-out'
             style={{ transform: `translateX(-${currentIndex * 100}%)` }}
           >
             {services.map((item, index) => (
@@ -45,13 +45,15 @@ export function WhatWeDo() {
                 key={index}
                 className='w-full flex-shrink-0 flex flex-col items-center space-y-4'
               >
-                <div className='w-full aspect-video relative'>
-                  <ServiceContent item={item} />
-                </div>
-                <div className='text-center max-w-3xl mx-auto'>
-                  <h3 className='text-xl font-bold text-white mb-2'>{item.title}</h3>
-                  <p className='text-gray-300'>{item.description}</p>
-                </div>
+                <div className='w-full flex flex-col md:min-h-[600px] md:flex-row md:items-center md:space-x-2'>
+                  <div className='text-center max-w-2xl mx-auto md:mb-0 mb-10'>
+                    <h3 className='text-xl font-bold text-white mb-2'>{item.title}</h3>
+                    <p className='text-gray-300'>{item.description}</p>
+                  </div>
+                  <div className='w-full aspect-video md:min-h-[275px] lg:min-h-[300px] relative'>
+                    <ServiceContent item={item} />
+                  </div>
+               </div>
               </div>
             ))}
           </div>
@@ -70,6 +72,6 @@ export function WhatWeDo() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
