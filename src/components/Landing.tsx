@@ -54,7 +54,6 @@ export default function Landing() {
             <img className='h-5 md:h-8' src='partnerLogos/sendgrid.svg' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/Microsoft_Azure.png' alt='' />
             <img className='h-5 md:h-8' src='partnerLogos/Triquestra-Logo.png' alt='' /> */}
-
             {/* <img className='h-5 md:h-8' src='partnerLogos/moderna.png' alt='' />
             <img className='h-5 md:h-5' src='partnerLogos/oracle.png' alt='' />
             <img className='h-5 md:h-9' src='partnerLogos/honey.png' alt='' /> */}
