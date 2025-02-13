@@ -46,7 +46,7 @@ export const ParallaxScroll = ({ images, className }: { images: string[]; classN
     <div
       className={cn('h-[30rem] sm:h-[40rem] items-start overflow-y-auto w-full', className)}
       ref={gridRef}>
-      <div
+      {/* <div
         className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start max-w-6xl mx-auto gap-4 py-2'
         ref={gridRef}>
         <div className='grid gap-5'>
@@ -90,7 +90,7 @@ export const ParallaxScroll = ({ images, className }: { images: string[]; classN
             </motion.div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

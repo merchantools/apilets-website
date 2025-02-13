@@ -3,6 +3,29 @@ import { ILatestNewsData } from '@/types/types';
 import { cn } from '@/utils/utils';
 import React, { useEffect, useState } from 'react';
 
+interface InewsData {
+  title: string;
+  description: string;
+}
+
+const newsData: InewsData[] = [
+  {
+    title: 'Online Registration',
+    description:
+      'Online registration for the academic year 2025-26 is now open. Register now to secure your child’s admission at St Mary’s School, Fatehgarh Sahib.',
+  },
+  {
+    title: 'Scholarship Program',
+    description:
+      'St Mary’s School, Fatehgarh Sahib, offers a scholarship program for meritorious students. Apply now to avail scholarships for the academic year 2025-26.',
+  },
+  {
+    title: 'Parent-Teacher Meeting',
+    description:
+      'A parent-teacher meeting will be held on 15th March 2025 at St Mary’s School, Fatehgarh Sahib. Parents are requested to attend the meeting to discuss their child’s progress.',
+  },
+];
+
 export const getNews = async () => {
   let data = await fetch('/api?url=news/?priority=important');
 
@@ -25,29 +48,8 @@ export const InfiniteMovingInfos = ({
 }) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const scrollerRef = React.useRef<HTMLUListElement>(null);
-  const [news, setnews] = useState([]);
+  const [news, setnews] = useState<InewsData[] | []>(newsData);
 
-  const newsData = [
-    {
-      title: 'Online Registration',
-      description:
-        'Online registration for the academic year 2025-26 is now open. Register now to secure your child’s admission at St Mary’s School, Fatehgarh Sahib.',
-    },
-    {
-      title: 'Scholarship Program',
-      description:
-        'St Mary’s School, Fatehgarh Sahib, offers a scholarship program for meritorious students. Apply now to avail scholarships for the academic year 2025-26.',
-    },
-    {
-      title: 'Parent-Teacher Meeting',
-      description:
-        'A parent-teacher meeting will be held on 15th March 2025 at St Mary’s School, Fatehgarh Sahib. Parents are requested to attend the meeting to discuss their child’s progress.',
-    },
-  ];
-
-  useEffect(() => {
-    setnews(newsData);
-  }, []);
   useEffect(() => {
     addAnimation();
   }, [news]);
@@ -102,23 +104,24 @@ export const InfiniteMovingInfos = ({
           start && 'animate-scroll ',
           pauseOnHover && 'hover:[animation-play-state:paused]'
         )}>
-        {news.map((item, idx) => (
-          <li
-            className='max-w-full relative  flex-shrink-0  px-1 py-1]'
-            style={{
-              background: 'linear-gradient(180deg, var(--slate-800), var(--slate-900)',
-            }}
-            key={idx}>
-            <blockquote>
-              <div
-                aria-hidden='true'
-                className='user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5  w-[calc(100%_+_4px)]'></div>
-              <p className=' relative z-20 text-sm  leading-[1.6] text-accent font-semibold'>
-                {item.description}
-              </p>
-            </blockquote>
-          </li>
-        ))}
+        {Array.isArray(news) &&
+          news.map((item: InewsData, idx: number) => (
+            <li
+              className='max-w-full relative  flex-shrink-0  px-1 py-1]'
+              style={{
+                background: 'linear-gradient(180deg, var(--slate-800), var(--slate-900)',
+              }}
+              key={idx}>
+              <blockquote>
+                <div
+                  aria-hidden='true'
+                  className='user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5  w-[calc(100%_+_4px)]'></div>
+                <p className=' relative z-20 text-sm  leading-[1.6] text-accent font-semibold'>
+                  {item.description}
+                </p>
+              </blockquote>
+            </li>
+          ))}
       </ul>
     </div>
   );

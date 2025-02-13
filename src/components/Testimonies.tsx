@@ -5,11 +5,11 @@ const Tweet = ({ name, position, text, photoLink, tweetLink }: any) => {
       <a href={tweetLink} className='cursor-pointer'>
         <div className='relative p-6 space-y-6 leading-none rounded-lg bg-slate-800 ring-1 ring-gray-900/5 highlight'>
           <div className='flex items-center space-x-4'>
-            <img
+            {/* <img
               src={photoLink}
               className='w-12 h-12 bg-center bg-cover border rounded-full'
               alt={name}
-            />
+            /> */}
             <div>
               <h3 className='text-lg font-semibold text-white'>{name}</h3>
               <p className='text-gray-500 text-md'>{position}</p>

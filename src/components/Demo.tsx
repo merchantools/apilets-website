@@ -87,7 +87,6 @@ export default function Demo() {
           Aliquam ultrices sagittis orci a scelerisque purus. Ligula ullamcorper malesuada proin
           libero nunc consequat.
         </p>
-        <img src='images/product.png' className='mt-8 rounded-xl' alt='placeholder' />
       </div> */}
     </section>
   );
