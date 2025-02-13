@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  @apply bg-white font-roboto;
+  @apply bg-base font-roboto;
 }
 
 p {

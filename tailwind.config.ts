@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import colors from 'tailwindcss/colors';
+const { default: flattenColorPalette } = require('tailwindcss/lib/util/flattenColorPalette');
 
 const config: Config = {
   content: [
@@ -8,6 +9,18 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: {
+      'primary': '#393a72',    // Dark Blue/Purple
+      'secondary': '#a6a465',  // Sage Green
+      'accent': '#f8c811',     // Yellow
+      'highlight': '#6061ad',  // Purple
+      'base': '#fcfcfc',      // White
+      blueZ: '#393a72',
+    },
+    fontFamily: {
+      roboto: ['Roboto', 'sans-serif'],
+      blueZ: ['#393a72', 'sans-serif'],
+    },
     accentColor: ({ theme }) => ({
       ...theme('colors'),
       auto: 'auto',
@@ -985,3 +998,14 @@ const config: Config = {
   plugins: [],
 };
 export default config;
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme('colors'));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ':root': newVars,
+  });
+}

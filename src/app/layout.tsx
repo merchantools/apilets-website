@@ -20,8 +20,8 @@ const manrope = Manrope({
   subsets: ['latin'],
 });
 export const metadata: Metadata = {
-  title: 'apilets - Software Solutions',
-  description: 'We are a software company that provide expertise to retailers, manufacturers, and wholesalers.',
+  title: 'apilets - MACH experts',
+  description: 'we are composing your commerce software',
 };
 
 export default function RootLayout({
@@ -33,35 +33,36 @@ export default function RootLayout({
     <>
       <html lang='en'>
         <Head>
-          <title>APILETS – Software Solutions</title>
-          <meta content='Example' name='description' />
-          <meta property='og:url' content='apilets.com' />
-          <meta property='og:description' content='Software solutions' />
-          <meta property='og:title' content='MACH at MACH speed' />
+          <title>apilets - Software Solutions</title>
+          <meta content='we are composable commerce experts' name='description' />
+          <meta property='og:url' content='https://apilets.com' />
+          <meta property='og:description' content='apilets - we compose your commerce software. We are your MACH experts.' />
+          <meta property='og:title' content='apilets - we compose your commerce software' />
+          <meta property='og:image' content='/logo2.png' />
           <link rel='shortcut icon' href='/favicon.png' />
         </Head>
 
         <body className={manrope.className}>
-          <div className='h-full leading-normal text-gray-600'>
+          <div className='relative min-h-screen flex flex-col leading-normal text-gray-600'>
             <div
-              className='absolute top-0 left-0 right-0  shadow-lg -bottom-full  md:bottom-0  -z-10
-            bg-gradient-to-br  from-purple-400 from-30% via-cyan-400 via-50% to-pink-400 to-80% animate-gradient bg-[length:400%_400%] bg-opacity-10'
+              className='fixed top-0 left-0 right-0 bottom-0 -z-10
+            bg-gradient-to-br from-purple-200 from-30% via-cyan-200 via-50% to-pink-200 to-80% animate-gradient bg-[length:400%_400%] bg-opacity-10'
               style={{
                 animation: 'gradient 8s ease infinite',
               }}
             />
             <div
-              className='absolute top-0 left-0 right-0  md:bottom-0 -z-30 bg-opacity-30
-            bg-gradient-to-tr from-purple-400 from-30%  via-cyan-400 via-50% to-pink-400 to-80% animate-gradient bg-[length:500%_500%] '
+              className='fixed top-0 left-0 right-0 bottom-0 -z-30 bg-opacity-30
+            bg-gradient-to-tr from-purple-200 from-30% via-cyan-200 via-50% to-pink-200 to-80% animate-gradient bg-[length:500%_500%]'
               style={{
                 animation: 'gradient 8s ease infinite',
               }}
             />
             <Header />
             <Suspense>
-              {/* <main className='min-h-[calc(100vh-0px)] md:min-h-[calc(100vh-76px)] bg-white pt-14 sm:pt-16  md:pt-20 '> */}
-              {children}
-              {/* </main> */}
+              <main className='flex-grow'>
+                {children}
+              </main>
             </Suspense>
             <Footer />
           </div>

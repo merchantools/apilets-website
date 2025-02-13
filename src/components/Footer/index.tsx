@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className='pt-16 pb-12 bg-gray-900 md:pt-20'>
       <div className='mx-8 max-w-7xl md:mx-10 lg:mx-20 xl:mx-auto'>
         <div className='flex justify-center text-gray-400'>
-          <div className='grid grid-cols-2 gap-8 mb-20 md:gap-28 md:grid-cols-5'>
+          <div className='grid grid-cols-2 items-center justify-items-center gap-8 mb-20 md:gap-28'>
             <ul className='space-y-1.5'>
               <li>
                 <a href='#'>
@@ -11,7 +11,7 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-            <ul className='space-y-1.5'>
+            {/* <ul className='space-y-1.5'>
               <li className='mb-4 font-semibold text-white uppercase'>apilets</li>
               <li>
                 <a href='#'>About</a>
@@ -22,12 +22,11 @@ export default function Footer() {
               <li>
                 <a href='#'>Careers</a>
               </li>
-
               <li>
                 <a href='#'>Blog</a>
               </li>
-            </ul>
-            <ul className='space-y-1.5'>
+            </ul> */}
+            {/* <ul className='space-y-1.5'>
               <li className='mb-4 font-semibold text-white uppercase'>Product</li>
               <li>
                 <a href='#features'>Features</a>
@@ -38,23 +37,14 @@ export default function Footer() {
               <li>
                 <a href='#'>Purpose</a>
               </li>
-            </ul>
+            </ul> */}
             <ul className='space-y-1.5'>
               <li className='mb-4 font-semibold text-white uppercase'>Support</li>
               <li>
-                <a href='#'>Contact Us</a>
-              </li>
-              <li>
-                <a href='#'>Twitter</a>
-              </li>
-              <li>
-                <a href='#'>Slack</a>
-              </li>
-              <li>
-                <a href='#'>System Status</a>
+                <a href='/contact'>Contact Us</a>
               </li>
             </ul>
-            <ul className='space-y-1.5'>
+            {/* <ul className='space-y-1.5'>
               <li className='mb-4 font-semibold text-white uppercase'>Resources</li>
               <li>
                 <a href='#'>Developer API</a>
@@ -68,7 +58,7 @@ export default function Footer() {
               <li>
                 <a href='#'>Security</a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         <p className='-mt-8 text-center text-gray-300'>
