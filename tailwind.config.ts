@@ -346,9 +346,6 @@ const config: Config = {
       0: '0',
       DEFAULT: '1',
     },
-    fontFamily: {
-      roboto: ['"Roboto"', '"sans-serif"'],
-    },
     fontSize: {
       xxxs: ['0.55rem', { lineHeight: '0.8rem' }],
       xxs: ['0.65rem', { lineHeight: '1rem' }],
