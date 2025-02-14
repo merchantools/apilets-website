@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const menuItems = [
-  // { name: 'Home', link: '/' },
-  { name: 'Who We Are', link: '/who-we-are' },
+  { name: 'Home', link: '/' },
   { name: 'What We Do', link: '/what-we-do' },
   { name: 'Contact Us', link: '/contact' },
 ];

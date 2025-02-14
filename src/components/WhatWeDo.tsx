@@ -33,7 +33,7 @@ export function WhatWeDo() {
   }
 
   return (
-    <div className='py-5 bg-opacity-90 bg-primary w-full md:w-4/5 w-70 mx-auto md:rounded-xl rounded-sm'>
+    <div className='py-5 bg-opacity-90 bg-secondary w-full md:w-4/5 w-70 mx-auto md:rounded-xl rounded-sm'>
       <div className='max-w-7xl mx-auto px-4'>
         <div className='relative overflow-hidden'>
           <div 
@@ -47,8 +47,8 @@ export function WhatWeDo() {
               >
                 <div className='w-full flex flex-col md:min-h-[600px] md:flex-row md:items-center md:space-x-2'>
                   <div className='text-center max-w-2xl mx-auto md:mb-0 mb-10'>
-                    <h3 className='text-xl font-bold text-white mb-2'>{item.title}</h3>
-                    <p className='text-gray-300'>{item.description}</p>
+                    <h3 className='text-3xl font-bold text-black mb-2'><h3 className='font-bold text-black mb-2' dangerouslySetInnerHTML={{ __html: item.title }} /></h3>
+                    <p className='text-gray-700'><p className='text-gray-700' dangerouslySetInnerHTML={{ __html: item.description }} /></p>
                   </div>
                   <div className='w-full aspect-video md:min-h-[275px] lg:min-h-[300px] relative'>
                     <ServiceContent item={item} />
