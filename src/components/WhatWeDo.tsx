@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { contentService, ContentItem } from '@/services/contentService';
-import { ServiceContent } from '@/services/contentServiceContext';
+import { ServiceImage } from '@/components/ServiceImage';
 import { StickyScroll } from './stickyScroll';
 
 export function WhatWeDo() {
@@ -51,7 +51,7 @@ export function WhatWeDo() {
                     <p className='text-gray-700'><p className='text-gray-700' dangerouslySetInnerHTML={{ __html: item.description }} /></p>
                   </div>
                   <div className='w-full aspect-video md:min-h-[275px] lg:min-h-[300px] relative'>
-                    <ServiceContent item={item} />
+                    <ServiceImage item={item} />
                   </div>
                </div>
               </div>

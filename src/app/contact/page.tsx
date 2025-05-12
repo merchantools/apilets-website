@@ -9,7 +9,6 @@ export default function Contact() {
             <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
             <div className="space-y-4">
               <p>Email: info@apilets.com</p>
-              <p>Phone: +61 490 933 333</p>
             </div>
           </div>
           <div>

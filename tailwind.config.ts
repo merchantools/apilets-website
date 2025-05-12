@@ -9,12 +9,22 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    // colors: {
+    //   'primary': '#393a72',    // Dark Blue/Purple
+    //   // 'primary': '#646E68',    // Dark Blue/Purple
+    //   'secondary': '#a6a465',  // Sage Green
+    //   'accent': '#f8c811',     // Yellow
+    //   'highlight': '#6061ad',  // Purple
+    //   'base': '#fcfcfc',      // White
+    //   blueZ: '#393a72',
+    // },
     colors: {
-      'primary': '#393a72',    // Dark Blue/Purple
+      // 'primary': '#393a72',    // Dark Blue/Purple
+      'primary': '#646E68',    // Dark Blue/Purple
       'secondary': '#a6a465',  // Sage Green
-      'accent': '#f8c811',     // Yellow
+      'accent': '#B48EAE',     // Yellow
       'highlight': '#6061ad',  // Purple
-      'base': '#fcfcfc',      // White
+      'base': '#C9C5CB',      // White
       blueZ: '#393a72',
     },
     fontFamily: {

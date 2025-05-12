@@ -17,7 +17,7 @@ class ContentService {
     return ContentService.instance;
   }
 
-  async getServices(): Promise<ContentItem[]> {
+async getServices(): Promise<ContentItem[]> {
     // In the future, this could fetch from an API
     return [
         {
@@ -29,9 +29,9 @@ class ContentService {
                 <span className='text-lg md:text-xl lg:text-2xl'>Commercetools Experts</span>
               </div>
             `,
-            imageUrl: '/shop.jpg',
+            imageUrl: '/themob.jpg',
         },{
-            title: 'Consulting: Cloud, eCommerce & Data Migration',
+            title: 'Cloud, Modernization and MACH',
             description:
                 'Our experts provide strategic guidance and hands-on support to navigate complex cloud migrations, eCommerce transformations, and data modernization initiatives. Whether you are adopting AWS, Azure, or GCP, migrating from legacy monoliths, or modernizing your customer experience, we ensure a seamless transition.',
             content: `<div className='h-full w-full flex items-center justify-center text-white bg-[linear-gradient(to_bottom_right,theme(colors.blue.400),theme(colors.purple.500))] md:bg-transparent'>
@@ -46,7 +46,7 @@ class ContentService {
             </div>`,
             imageUrl: '/divinetechygirl.jpg',
         },{
-            title: 'Cloud-Native Software Design & Implementation',
+            title: 'Cloud-Native Software',
             description:
                 `We architect and build high-performance, resilient, and scalable cloud-native applications tailored to your business needs. Our solutions leverage:<
                 <ul className='text-left list-disc list-inside'>
@@ -61,7 +61,7 @@ class ContentService {
             `,
             imageUrl: '/cloud-native.jpg',
         },{
-            title: 'User Experience & Frontend Development',
+            title: 'UX Design & Development',
             description:
                 `We build high-performance, modern web applications that deliver seamless and engaging user experiences. Our frontend expertise includes:
                 <ul className='text-left list-disc list-inside'>

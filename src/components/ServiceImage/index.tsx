@@ -1,0 +1,24 @@
+import React from 'react';
+import Image from 'next/image';
+import { ContentItem } from '@/services/contentService';
+
+interface ServiceImageProps {
+  item: ContentItem;
+}
+
+export function ServiceImage({ item }: ServiceImageProps) {
+  return (
+    <div className="w-full h-full">
+      {item.imageUrl ? (
+        <Image
+          src={item.imageUrl}
+          fill
+          className="object-cover"
+          alt={item.title}
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600" />
+      )}
+    </div>
+  );
+} 
