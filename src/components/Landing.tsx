@@ -3,18 +3,15 @@
 import React from 'react';
 import { WhatWeDo } from './WhatWeDo';
 import { Partners } from './Partners';
-import {TypeAnimation} from 'react-type-animation';
+import { TypeAnimation } from 'react-type-animation';
 
 export default function Landing() {
     return (
-        <div className="min-h-screen">
-            <WhatWeDo />
-            <div className="py-12">
-                <Partners />
-            </div>
-            <section className="min-h-screen py-20">
+        <div className="h-screen overflow-y-scroll snap-y snap-mandatory">
+            {/* Hero Section */}
+            <section id="hero" className="h-screen snap-center flex items-center justify-center bg-white">
                 <div className="max-w-3xl mx-8 md:mx-auto">
-                    <div className="my-10 space-y-6 text-center sm:my-8 md:space-y-8">
+                    <div className="space-y-6 text-center md:space-y-8">
                         <div className="space-y-3 md:space-y-4">
                             <h1 className="text-3xl font-semibold text-black sm:text-5xl md:text-6xl md:text-gray-800">
                                 apilets, <TypeAnimation
@@ -40,6 +37,20 @@ export default function Landing() {
                     </div>
                 </div>
             </section>
+
+            {/* WhatWeDo Section */}
+            <div id="what-we-do" className="h-screen snap-center flex items-center justify-center bg-gray-50">
+                <div className="w-full h-full flex items-center justify-center">
+                    <WhatWeDo />
+                </div>
+            </div>
+
+            {/* Partners Section */}
+            <div className="h-screen snap-center flex items-center justify-center bg-white">
+                <div className="w-full h-full flex items-center justify-center">
+                    <Partners />
+                </div>
+            </div>
         </div>
     );
 }

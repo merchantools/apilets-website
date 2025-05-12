@@ -1,30 +1,65 @@
+'use client';
+
+import React from 'react';
+
 export default function Contact() {
   return (
-
-    <main className="min-h-screen py-20">
+    <main className="min-h-screen py-20 bg-white">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold mb-8">Contact Us</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
-            <div className="space-y-4">
-              <p>Email: info@apilets.com</p>
+        <h1 className="text-4xl font-bold mb-12 text-center">Contact Us</h1>
+        
+        {/* Locations Section */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-semibold mb-8 text-center">Our Locations</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
+              <h2 className="font-medium text-lg mb-3 text-white font-bold">Australia</h2>
+              <p className="text-gray-600 text-white">12 Bullard Street</p>
+              <p className="text-gray-600 text-white">Sydney, NSW</p>
+              <p className="text-gray-600 text-white">Australia</p>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
+              <h2 className="font-medium text-lg mb-3 text-white font-bold">Europe</h2>
+              <p className="text-gray-600 text-white">Drumderry, Barron</p>
+              <p className="text-gray-600 text-white">Sligo, Co. Sligo</p>
+              <p className="text-gray-600 text-white">Ireland</p>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
+              <h2 className="font-medium text-lg mb-3 text-white font-bold">India</h2>
+              <p className="text-gray-600 text-white">2nd Floor</p>
+              <p className="text-gray-600 text-white">Muttathottil Building</p>
+              <p className="text-gray-600 text-white">Edappally, Kerala</p>
+              <p className="text-gray-600 text-white">India</p>
             </div>
           </div>
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Locations</h2>
-            <div className="space-y-4">
+        </div>
+
+        {/* Get In Touch Section */}
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-semibold mb-8 text-center">Get In Touch</h2>
+          <div className="bg-white rounded-lg shadow-md p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-medium">Australia</h3>
-                <p>Sydney, New South Wales</p>
-                <p>Australia</p>
+                <h3 className="font-medium text-lg mb-4">Contact Information</h3>
+                <div className="space-y-4">
+                  <p className="flex items-center text-gray-600">
+                    <span className="font-medium mr-2">Email:</span>
+                    your.email@example.com
+                  </p>
+                  <p className="flex items-center text-gray-600">
+                    <span className="font-medium mr-2">Phone:</span>
+                    +1 234 567 890
+                  </p>
+                </div>
               </div>
               <div>
-                <h3 className="font-medium">India</h3>
-                <p>Cochin, Kerala</p>
-                <p>India</p>
+                <h3 className="font-medium text-lg mb-4">Business Hours</h3>
+                <div className="space-y-2 text-gray-600">
+                  <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                  <p>Saturday: 10:00 AM - 4:00 PM</p>
+                  <p>Sunday: Closed</p>
+                </div>
               </div>
-              {/* Add more office locations as needed */}
             </div>
           </div>
         </div>

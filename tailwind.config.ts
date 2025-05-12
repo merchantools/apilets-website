@@ -24,7 +24,7 @@ const config: Config = {
       'secondary': '#a6a465',  // Sage Green
       'accent': '#B48EAE',     // Yellow
       'highlight': '#6061ad',  // Purple
-      'base': '#C9C5CB',      // White
+      'base': '#646E68',      // White
       blueZ: '#393a72',
     },
     fontFamily: {

@@ -1,8 +1,9 @@
 export default function Footer() {
   return (
-    <footer className='pt-16 pb-12 bg-primary md:pt-20'>
+    <div id='footer' className='h-2 bg-gray-400'>
+    <footer className='pt-16 pb-12 bg-gray-200 md:pt-20'>
       <div className='mx-8 max-w-7xl md:mx-10 lg:mx-20 xl:mx-auto'>
-        <div className='flex justify-center text-gray-400'>
+        <div className='flex justify-center'>
           <div className='grid grid-cols-2 items-center justify-items-center gap-8 mb-20 md:gap-28'>
             <ul className='space-y-1.5'>
               <li>
@@ -39,9 +40,9 @@ export default function Footer() {
               </li>
             </ul> */}
             <ul className='space-y-1.5'>
-              <li className='mb-4 font-semibold text-white uppercase'>Support</li>
+              <li className='mb-4 font-semibold text-black uppercase'>Support</li>
               <li>
-                <a href='/contact'>Contact Us</a>
+                <a href='/contact' className='text-black hover:text-gray-700'>Contact Us</a>
               </li>
             </ul>
             {/* <ul className='space-y-1.5'>
@@ -61,7 +62,7 @@ export default function Footer() {
             </ul> */}
           </div>
         </div>
-        <p className='-mt-8 text-center text-gray-300'>
+        <p className='-mt-8 text-center text-gray-500'>
           {/* Made with ♡ by{' '}
           <a href='https://saurish.com/?utm_source=uranium' className='underline'>
             Saurish
@@ -70,5 +71,6 @@ export default function Footer() {
         </p>
       </div>
     </footer>
+    </div>
   );
 }

@@ -13,11 +13,11 @@ export function ServiceImage({ item }: ServiceImageProps) {
         <Image
           src={item.imageUrl}
           fill
-          className="object-cover"
+          className="object-cover rounded-xl"
           alt={item.title}
         />
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600" />
+        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl" />
       )}
     </div>
   );

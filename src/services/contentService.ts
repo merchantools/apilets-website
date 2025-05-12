@@ -48,7 +48,7 @@ async getServices(): Promise<ContentItem[]> {
         },{
             title: 'Cloud-Native Software',
             description:
-                `We architect and build high-performance, resilient, and scalable cloud-native applications tailored to your business needs. Our solutions leverage:<
+                `We architect and build high-performance, resilient, and scalable cloud-native applications tailored to your business needs. Our solutions leverage:
                 <ul className='text-left list-disc list-inside'>
                   <li>✅ Microservices for modular and efficient system design</li>
                   <li>✅ Serverless & Kubernetes for cost-effective scalability</li>

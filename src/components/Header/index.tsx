@@ -15,8 +15,8 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header>
-      <div className='flex flex-col px-4 pt-4 mx-auto text-black roboto-regular max-w-7xl md:mx-10 lg:mx-20 xl:mx-auto md:flex-row md:items-center md:justify-between'>
+    <header className="bg-white">
+      <div className='flex flex-col px-4 pt-4 mx-auto text-white roboto-regular max-w-7xl md:mx-10 lg:mx-20 xl:mx-auto md:flex-row md:items-center md:justify-between'>
         <div className='flex flex-row items-center justify-between p-4'>
           <Link href="/">
             <img src='/logo2.png' alt='logo' className='h-16 bg-cover' />
@@ -46,7 +46,7 @@ export default function Header() {
           className={
             'mt-3 flex-grow items-start md:flex lg:mt-0' + (navbarOpen ? ' flex' : ' hidden')
           }>
-          <div className='fixed top-24 right-4 w-64 bg-primary p-4 rounded-lg shadow-lg md:relative md:top-0 md:w-auto md:bg-transparent md:p-0 md:shadow-none md:ml-auto'>
+          <div className='fixed top-24 right-4 w-64 bg-black p-4 rounded-lg shadow-lg md:relative md:top-0 md:w-auto md:bg-transparent md:p-0 md:shadow-none md:ml-auto'>
             <div className='flex-col pl-4 text-xl md:flex-grow md:pl-0'>
               <ul className='flex flex-wrap items-center flex-grow gap-2 pr-4 space-x-2 md:gap-6 md:space-x-6'>
                 {menuItems.map((item) => (
@@ -55,8 +55,8 @@ export default function Header() {
                       href={item.link}
                       className={`text-lg ${
                         pathname === item.link
-                          ? 'text-secondary font-medium'
-                          : 'text-white md:text-black hover:text-gray-300 md:hover:text-gray-700'
+                          ? 'text-gray-500 font-medium'
+                          : 'text-black hover:text-gray-700'
                       }`}>
                       {item.name}
                     </Link>

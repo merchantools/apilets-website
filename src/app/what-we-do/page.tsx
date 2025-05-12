@@ -2,6 +2,7 @@
 import {ContentItem, contentService} from "@/services/contentService";
 import React, {useEffect, useState} from 'react';
 import {ServiceCard} from "@/components/ServiceCard";
+import { MediumBlogPosts } from '@/components/MediumBlogPosts';
 
 export default function WhatWeDo() {
     const [services, setServices] = useState<ContentItem[]>([]);
@@ -15,7 +16,7 @@ export default function WhatWeDo() {
     }, []);
     
     return (
-        <main className="min-h-screen py-20">
+        <main className="min-h-screen py-20 bg-white">
             <div className="container mx-auto px-4">
                 <h1 className="text-4xl font-bold mb-8 text-center">apilets - We Do</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
@@ -24,6 +25,7 @@ export default function WhatWeDo() {
                     ))}
                 </div>
             </div>
+            <MediumBlogPosts />
         </main>
     );
 } 
