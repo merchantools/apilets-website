@@ -11,25 +11,25 @@ export default function Contact() {
         {/* Locations Section */}
         <div className="mb-20">
           <h2 className="text-2xl font-semibold mb-8 text-center">Our Locations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-600">
             <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
-              <h2 className="font-medium text-lg mb-3 text-white font-bold">Australia</h2>
-              <p className="text-gray-600 text-white">12 Bullard Street</p>
-              <p className="text-gray-600 text-white">Sydney, NSW</p>
-              <p className="text-gray-600 text-white">Australia</p>
+              <h2 className="font-large text-lg mb-3 font-bold">Australia</h2>
+              <p className="text-gray-600">12 Bullard Street</p>
+              <p className="text-gray-600">Sydney, NSW</p>
+              <p className="text-gray-600">Australia</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
-              <h2 className="font-medium text-lg mb-3 text-white font-bold">Europe</h2>
-              <p className="text-gray-600 text-white">Drumderry, Barron</p>
-              <p className="text-gray-600 text-white">Sligo, Co. Sligo</p>
-              <p className="text-gray-600 text-white">Ireland</p>
+              <h2 className="font-large text-lg mb-3 font-bold">Europe</h2>
+              <p className="text-gray-600">Drumderry, Barron</p>
+              <p className="text-gray-600">Sligo, Co. Sligo</p>
+              <p className="text-gray-600">Ireland</p>
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
-              <h2 className="font-medium text-lg mb-3 text-white font-bold">India</h2>
-              <p className="text-gray-600 text-white">2nd Floor</p>
-              <p className="text-gray-600 text-white">Muttathottil Building</p>
-              <p className="text-gray-600 text-white">Edappally, Kerala</p>
-              <p className="text-gray-600 text-white">India</p>
+              <h2 className="font-large text-lg mb-3 font-bold">India</h2>
+              <p className="text-gray-600">2nd Floor</p>
+              <p className="text-gray-600">Muttathottil Building</p>
+              <p className="text-gray-600">Edappally, Kerala</p>
+              <p className="text-gray-600">India</p>
             </div>
           </div>
         </div>
@@ -45,10 +45,6 @@ export default function Contact() {
                   <p className="flex items-center text-gray-600">
                     <span className="font-medium mr-2">Email:</span>
                     your.email@example.com
-                  </p>
-                  <p className="flex items-center text-gray-600">
-                    <span className="font-medium mr-2">Phone:</span>
-                    +1 234 567 890
                   </p>
                 </div>
               </div>
