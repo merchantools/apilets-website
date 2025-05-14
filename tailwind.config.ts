@@ -9,12 +9,22 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    // colors: {
+    //   'primary': '#393a72',    // Dark Blue/Purple
+    //   // 'primary': '#646E68',    // Dark Blue/Purple
+    //   'secondary': '#a6a465',  // Sage Green
+    //   'accent': '#f8c811',     // Yellow
+    //   'highlight': '#6061ad',  // Purple
+    //   'base': '#fcfcfc',      // White
+    //   blueZ: '#393a72',
+    // },
     colors: {
-      'primary': '#393a72',    // Dark Blue/Purple
+      // 'primary': '#393a72',    // Dark Blue/Purple
+      'primary': '#646E68',    // Dark Blue/Purple
       'secondary': '#a6a465',  // Sage Green
-      'accent': '#f8c811',     // Yellow
+      'accent': '#B48EAE',     // Yellow
       'highlight': '#6061ad',  // Purple
-      'base': '#fcfcfc',      // White
+      'base': '#646E68',      // White
       blueZ: '#393a72',
     },
     fontFamily: {
@@ -345,9 +355,6 @@ const config: Config = {
     flexShrink: {
       0: '0',
       DEFAULT: '1',
-    },
-    fontFamily: {
-      roboto: ['"Roboto"', '"sans-serif"'],
     },
     fontSize: {
       xxxs: ['0.55rem', { lineHeight: '0.8rem' }],
@@ -789,8 +796,8 @@ const config: Config = {
     screens: {
       sm: '500px',
       // sm: '640px',
-      md: '768px',
-      lg: '1024px',
+      md: '1024px',
+      lg: '1200px',
       xl: '1280px',
       '2xl': '1536px',
     },
