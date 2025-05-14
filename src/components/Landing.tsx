@@ -46,10 +46,15 @@ export default function Landing() {
             </div>
 
             {/* Partners Section */}
-            <div className="h-screen snap-center flex items-center justify-center bg-white">
+            <div id="partners" className="h-screen snap-center flex items-center justify-center bg-white">
                 <div className="w-full h-full flex items-center justify-center">
                     <Partners />
                 </div>
+            </div>
+
+            {/* Footer Section - Not snapped */}
+            <div className="snap-none">
+                <div id="footer" className="h-2 bg-gray-400"></div>
             </div>
         </div>
     );
