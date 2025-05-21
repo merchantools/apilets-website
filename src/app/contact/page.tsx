@@ -44,7 +44,7 @@ export default function Contact() {
                 <div className="space-y-4">
                   <p className="flex items-center text-gray-600">
                     <span className="font-medium mr-2">Email:</span>
-                    your.email@example.com
+                    info@apilets.com
                   </p>
                 </div>
               </div>
