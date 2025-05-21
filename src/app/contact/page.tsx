@@ -68,7 +68,7 @@ export default function Contact() {
             </div>
             <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow bg-gray-400">
               <h2 className="font-large text-lg mb-3 font-bold">Europe</h2>
-              <p className="text-gray-600">Drumderry, Barron</p>
+              <p className="text-gray-600">Drumderry, Barroe</p>
               <p className="text-gray-600">Sligo, Co. Sligo</p>
               <p className="text-gray-600">Ireland</p>
             </div>
