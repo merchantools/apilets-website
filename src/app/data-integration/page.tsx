@@ -1022,7 +1022,7 @@ export default function DataIntegration() {
                   <span className="inline-block px-2 py-1 bg-accent-100 text-accent-700 rounded text-xs font-medium mr-2">
                     As seen in demo
                   </span>
-                  2,000+ records processed in seconds
+                  thousands of records processed in seconds
                 </p>
               </div>
             </div>
