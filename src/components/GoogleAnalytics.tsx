@@ -1,16 +1,40 @@
 'use client';
 
 import Script from 'next/script';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function GoogleAnalytics() {
   // Replace with your actual GA4 tracking ID
   // Set this in your .env.local file as NEXT_PUBLIC_GA_MEASUREMENT_ID
   const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   // Don't load analytics in development unless explicitly enabled
   if (process.env.NODE_ENV === 'development' && !process.env.NEXT_PUBLIC_GA_DEBUG) {
     return null;
   }
+
+  // Track page views when route changes
+  useEffect(() => {
+    if (pathname) {
+      const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
+
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('config', GA_MEASUREMENT_ID, {
+          page_path: url,
+        });
+
+        // Send a specific page_view event with page title
+        (window as any).gtag('event', 'page_view', {
+          page_path: url,
+          page_title: document.title,
+          page_location: window.location.href,
+        });
+      }
+    }
+  }, [pathname, searchParams, GA_MEASUREMENT_ID]);
 
   return (
     <>
@@ -28,6 +52,7 @@ export default function GoogleAnalytics() {
             gtag('js', new Date());
             gtag('config', '${GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
+              send_page_view: true
             });
 
             // Track scroll depth
