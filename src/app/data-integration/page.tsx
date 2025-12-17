@@ -123,6 +123,17 @@ export default function DataIntegration() {
   const [submittedEmail, setSubmittedEmail] = useState<string>('');
   const [selectedTab, setSelectedTab] = useState<'visual' | 'advanced' | 'functions'>('visual');
 
+  // Track page view on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'page_view', {
+        page_path: '/data-integration',
+        page_title: 'Data Integration - Apilets',
+        page_location: window.location.href,
+      });
+    }
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -179,8 +190,24 @@ export default function DataIntegration() {
       // Track with Google Analytics if available
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'form_submit', {
+<<<<<<< HEAD
+          event_category: 'conversion',
+          event_label: 'data_integration_registration',
+          page_path: '/data-integration',
+          platform: data.platform || 'not_specified',
+          interest: data.interest || 'not_specified',
+          newsletter_signup: data.newsletter,
+        });
+
+        // Track as a conversion event
+        (window as any).gtag('event', 'generate_lead', {
+          event_category: 'conversion',
+          event_label: 'data_integration_lead',
+          page_path: '/data-integration',
+=======
           event_category: 'engagement',
           event_label: 'data_nexus_registration',
+>>>>>>> master
         });
       }
     } catch (error) {
@@ -198,6 +225,15 @@ export default function DataIntegration() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+
+      // Track section navigation
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'section_navigation', {
+          event_category: 'engagement',
+          event_label: `scroll_to_${id}`,
+          page_path: '/data-integration',
+        });
+      }
     }
   };
 
@@ -503,7 +539,17 @@ export default function DataIntegration() {
               ].map((tab) => (
                 <button
                   key={tab.id}
-                  onClick={() => setSelectedTab(tab.id)}
+                  onClick={() => {
+                    setSelectedTab(tab.id);
+                    // Track tab selection
+                    if (typeof window !== 'undefined' && (window as any).gtag) {
+                      (window as any).gtag('event', 'tab_selection', {
+                        event_category: 'engagement',
+                        event_label: tab.id,
+                        page_path: '/data-integration',
+                      });
+                    }
+                  }}
                   className={`px-6 py-3 font-semibold transition-colors ${
                     selectedTab === tab.id
                       ? 'text-accent-400 border-b-2 border-accent-400'
