@@ -19,10 +19,61 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
+// Connection types data
+const connectionTypes = [
+  {
+    category: 'DATABASE',
+    items: [
+      { name: 'PostgreSQL', description: 'PostgreSQL relational database', icon: '🗄️' },
+      { name: 'MySQL', description: 'MySQL relational database', icon: '🗄️' },
+    ],
+  },
+  {
+    category: 'NOSQL DATABASE',
+    items: [
+      { name: 'MongoDB', description: 'MongoDB document database', icon: '🍃' },
+      { name: 'Redis', description: 'Redis key-value store', icon: '⚡' },
+    ],
+  },
+  {
+    category: 'CLOUD STORAGE',
+    items: [
+      { name: 'Amazon S3', description: 'Amazon S3 object storage', icon: '☁️' },
+      { name: 'Azure Blob Storage', description: 'Azure Blob Storage / Data Lake', icon: '☁️' },
+      { name: 'Google Cloud Storage', description: 'Google Cloud Storage buckets', icon: '☁️' },
+    ],
+  },
+  {
+    category: 'FILE STORAGE',
+    items: [
+      { name: 'Local File System', description: 'Local file system storage', icon: '📁' },
+      { name: 'SFTP Server', description: 'Secure File Transfer Protocol server', icon: '🔐' },
+    ],
+  },
+  {
+    category: 'API CONNECTORS',
+    items: [
+      { name: 'Commercetools', description: 'E-commerce platform API', icon: '🛍️' },
+      { name: 'REST API', description: 'Generic REST API endpoints', icon: '🔌' },
+      { name: 'Webhooks', description: 'Real-time webhook endpoints', icon: '⚡' },
+    ],
+  },
+];
+
+// Pipeline stages data
+const pipelineStages = [
+  { name: 'Raw Ingestion', description: 'Choose your data source', status: 'completed', icon: '📥' },
+  { name: 'Data Quality', description: 'Validate and clean data', status: 'completed', icon: '✓' },
+  { name: 'Data Correction', description: 'Correct data issues', status: 'skipped', icon: '🔧' },
+  { name: 'Data Grouping', description: 'Group and transform', status: 'completed', icon: '📊' },
+  { name: 'Data Mapping', description: 'Map to target schema', status: 'completed', icon: '🔀' },
+  { name: 'Final Load', description: 'Load to destination', status: 'completed', icon: '✅' },
+];
+
 export default function DataIntegration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [selectedTab, setSelectedTab] = useState<'visual' | 'advanced' | 'functions'>('visual');
 
   const {
     register,
@@ -32,14 +83,6 @@ export default function DataIntegration() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -57,7 +100,6 @@ export default function DataIntegration() {
       if (response.ok) {
         setSubmitStatus('success');
         reset();
-        // Track form submission event
         if (typeof window !== 'undefined' && (window as any).gtag) {
           (window as any).gtag('event', 'form_submit', {
             event_category: 'engagement',
@@ -83,7 +125,7 @@ export default function DataIntegration() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+      {/* Enhanced Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200 opacity-60" />
         <div className="container mx-auto px-4 relative z-10">
@@ -97,37 +139,115 @@ export default function DataIntegration() {
               Connect Your Ecommerce Data{' '}
               <span className="text-primary-600">Anywhere</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8">
+            <p className="text-xl md:text-2xl text-gray-600 mb-4">
+              Enterprise-grade data integration made simple
+            </p>
+            <p className="text-lg text-gray-500 mb-8">
               Seamlessly integrate data from your ecommerce platforms. Sync with marketing and CRM systems in real-time.
             </p>
+
+            {/* 4-Step Process Preview */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto">
+              {['Select', 'Configure', 'Credentials', 'Test'].map((step, index) => (
+                <motion.div
+                  key={step}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="bg-white rounded-lg p-4 shadow-md"
+                >
+                  <div className="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold mx-auto mb-2">
+                    {index + 1}
+                  </div>
+                  <p className="text-sm font-medium text-gray-700">{step}</p>
+                </motion.div>
+              ))}
+            </div>
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => {
-                  scrollToSection('register');
-                  if (typeof window !== 'undefined' && (window as any).gtag) {
-                    (window as any).gtag('event', 'click_hero_cta', {
-                      event_category: 'engagement',
-                      event_label: 'hero_get_started',
-                    });
-                  }
-                }}
+                onClick={() => scrollToSection('connections')}
                 className="px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg"
               >
-                Get Started
+                See How It Works
               </button>
               <button
-                onClick={() => scrollToSection('how-it-works')}
+                onClick={() => scrollToSection('register')}
                 className="px-8 py-4 bg-white text-primary-700 border-2 border-primary-500 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
               >
-                Learn More
+                Get Started Free
               </button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 bg-gray-50">
+      {/* Connections Section */}
+      <section id="connections" className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Connect Anything, Anywhere
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Pre-built connectors for all your critical systems
+            </p>
+          </motion.div>
+
+          <div className="max-w-6xl mx-auto space-y-12">
+            {connectionTypes.map((category, catIndex) => (
+              <div key={category.category}>
+                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">
+                  {category.category}
+                </h3>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {category.items.map((item, itemIndex) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: itemIndex * 0.05 }}
+                      viewport={{ once: true }}
+                      className="bg-slate-700 rounded-lg p-6 hover:bg-slate-600 transition-all cursor-pointer group"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="text-4xl">{item.icon}</div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-bold text-white mb-1 group-hover:text-accent-400 transition-colors">
+                            {item.name}
+                          </h4>
+                          <p className="text-sm text-gray-400">{item.description}</p>
+                        </div>
+                        <div className="px-2 py-1 bg-secondary-900 bg-opacity-50 text-secondary-400 text-xs rounded">
+                          Active
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <button
+              onClick={() => scrollToSection('sources-destinations')}
+              className="px-6 py-3 bg-accent-600 text-white rounded-lg font-semibold hover:bg-accent-700 transition-colors"
+            >
+              Explore Our Connectors
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Data Sources & Destinations Section */}
+      <section id="sources-destinations" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0 }}
@@ -137,117 +257,467 @@ export default function DataIntegration() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Why Choose Data Nexus?
+              Flexible Data Routing
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Powerful features to streamline your data integration workflow
+              Define unlimited sources and destinations for each connection
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+            {/* Data Sources Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-slate-800 rounded-xl p-8"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center text-2xl">
+                  📥
+                </div>
+                <h3 className="text-2xl font-bold text-white">Data Sources</h3>
+              </div>
+
+              <p className="text-gray-300 mb-6">
+                Configure multiple data sources per connection
+              </p>
+
+              <div className="space-y-4 bg-slate-900 rounded-lg p-4">
+                {/* Example Source 1 */}
+                <div className="bg-slate-700 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-white">marketplace products</h4>
+                    <span className="text-xs bg-accent-900 text-accent-300 px-2 py-1 rounded">s3_bucket</span>
+                  </div>
+                  <div className="space-y-1 text-sm text-gray-400">
+                    <p><span className="text-gray-500">Bucket:</span> apilets-demo-dataset</p>
+                    <p><span className="text-gray-500">Prefix:</span> /marketplace/sellers/products</p>
+                    <p><span className="text-gray-500">Format:</span> CSV</p>
+                    <p><span className="text-gray-500">Recursive:</span> true</p>
+                  </div>
+                </div>
+
+                {/* Example Source 2 */}
+                <div className="bg-slate-700 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-white">customer segment</h4>
+                    <span className="text-xs bg-accent-900 text-accent-300 px-2 py-1 rounded">s3_bucket</span>
+                  </div>
+                  <div className="space-y-1 text-sm text-gray-400">
+                    <p><span className="text-gray-500">Bucket:</span> apilets-demo-dataset</p>
+                    <p><span className="text-gray-500">Prefix:</span> /crm/customers/segmentation/</p>
+                    <p><span className="text-gray-500">Format:</span> JSON</p>
+                    <p><span className="text-gray-500">Recursive:</span> true</p>
+                  </div>
+                </div>
+              </div>
+
+              <ul className="mt-6 space-y-2 text-sm text-gray-300">
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Support for various file formats (CSV, JSON, XML)
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Prefix-based file organization
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Recursive directory scanning
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Smart file handling (ignore corrupt/missing files)
+                </li>
+              </ul>
+            </motion.div>
+
+            {/* Data Destinations Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-slate-800 rounded-xl p-8"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 bg-highlight-500 rounded-lg flex items-center justify-center text-2xl">
+                  📤
+                </div>
+                <h3 className="text-2xl font-bold text-white">Data Destinations</h3>
+              </div>
+
+              <p className="text-gray-300 mb-6">
+                Push data to any destination with intelligent batching
+              </p>
+
+              <div className="space-y-4 bg-slate-900 rounded-lg p-4">
+                {/* Example Destination */}
+                <div className="bg-slate-700 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h4 className="font-semibold text-white">commercetools categories</h4>
+                    <span className="text-xs bg-highlight-900 text-highlight-300 px-2 py-1 rounded">Api_commercetools</span>
+                  </div>
+                  <div className="space-y-1 text-sm text-gray-400">
+                    <p><span className="text-gray-500">Staging:</span> Enabled</p>
+                    <p><span className="text-gray-500">Container:</span> categories-test-202</p>
+                    <p><span className="text-gray-500">Resource Type:</span> category</p>
+                    <p><span className="text-gray-500">Max Retries:</span> 2</p>
+                    <p><span className="text-gray-500">Batch Size:</span> 20</p>
+                  </div>
+                </div>
+              </div>
+
+              <ul className="mt-6 space-y-2 text-sm text-gray-300">
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Push data to any destination
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Batch processing capabilities
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Staging support for testing
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Container-based organization
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-secondary-400">✓</span>
+                  Resource type mapping
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Data Mapping Section */}
+      <section id="mapping" className="py-20 bg-slate-800">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Transform Data Your Way
+            </h2>
+            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+              Visual and code-based mapping for ultimate flexibility
+            </p>
+          </motion.div>
+
+          <div className="max-w-5xl mx-auto">
+            {/* Tab Navigation */}
+            <div className="flex border-b border-gray-700 mb-8">
+              {[
+                { id: 'visual' as const, label: 'Visual Mapping' },
+                { id: 'advanced' as const, label: 'Advanced Transformations' },
+                { id: 'functions' as const, label: 'Built-in Functions' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedTab(tab.id)}
+                  className={`px-6 py-3 font-semibold transition-colors ${
+                    selectedTab === tab.id
+                      ? 'text-accent-400 border-b-2 border-accent-400'
+                      : 'text-gray-400 hover:text-gray-300'
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Tab Content */}
+            <div className="bg-slate-900 rounded-lg p-8">
+              {selectedTab === 'visual' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <h3 className="text-xl font-bold text-white mb-4">Drag & Drop Interface</h3>
+                  <p className="text-gray-400 mb-6">
+                    No coding required for basic transformations. Simply drag fields from source to destination.
+                  </p>
+                  <div className="bg-slate-800 rounded-lg p-6 border-2 border-dashed border-gray-600">
+                    <div className="grid grid-cols-2 gap-8">
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-400 mb-3">SOURCE FIELDS</h4>
+                        <div className="space-y-2">
+                          {['id', 'name', 'description', 'price', 'category'].map((field) => (
+                            <div key={field} className="bg-slate-700 rounded px-3 py-2 text-white text-sm cursor-move hover:bg-slate-600">
+                              {field}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-400 mb-3">TARGET FIELDS</h4>
+                        <div className="space-y-2">
+                          {['product_id', 'title', 'details', 'amount', 'category_id'].map((field) => (
+                            <div key={field} className="bg-slate-700 rounded px-3 py-2 text-white text-sm">
+                              {field}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {selectedTab === 'advanced' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <h3 className="text-xl font-bold text-white mb-4">JSON Configuration Example</h3>
+                  <p className="text-gray-400 mb-6">
+                    Handle complex, multilingual data with nested object mapping and aggregation
+                  </p>
+                  <div className="bg-black rounded-lg p-4 overflow-x-auto">
+                    <pre className="text-sm text-green-400 font-mono">
+{`{
+  "grouping": {
+    "enabled": true,
+    "group_by": ["key"],
+    "aggregations": {
+      "parent": {
+        "type": "first",
+        "column": "parent"
+      },
+      "names": {
+        "type": "collect_unique",
+        "column": "name"
+      }
+    }
+  },
+  "nested_objects": {
+    "name": {
+      "type": "multilingual",
+      "key_column": "locale",
+      "value_column": "localizedName"
+    }
+  },
+  "mapping": {
+    "key": "category.key",
+    "parent": "category.parent.id",
+    "name": "category.name"
+  }
+}`}
+                    </pre>
+                  </div>
+                  <div className="mt-6 grid md:grid-cols-2 gap-4">
+                    <div className="bg-slate-800 rounded-lg p-4">
+                      <h4 className="text-sm font-semibold text-accent-400 mb-2">✓ Grouping & Aggregation</h4>
+                      <p className="text-sm text-gray-400">Transform flat data into nested structures with array aggregation</p>
+                    </div>
+                    <div className="bg-slate-800 rounded-lg p-4">
+                      <h4 className="text-sm font-semibold text-accent-400 mb-2">✓ Nested Object Mapping</h4>
+                      <p className="text-sm text-gray-400">Handle complex, multilingual data with key-value transformations</p>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
+              {selectedTab === 'functions' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <h3 className="text-xl font-bold text-white mb-4">Built-in Transformation Functions</h3>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {[
+                      { name: 'Smart Grouping', desc: 'Group records by any field with aggregation' },
+                      { name: 'Nested Objects', desc: 'Create complex nested object structures' },
+                      { name: 'Multilingual', desc: 'Handle multi-language data transformations' },
+                      { name: 'Regex Transform', desc: 'Pattern-based text transformations' },
+                      { name: 'Array Operations', desc: 'Filter, map, and reduce array data' },
+                      { name: 'Column Concatenation', desc: 'Combine multiple columns into one' },
+                      { name: 'Type Conversion', desc: 'Convert between data types automatically' },
+                      { name: 'Date Formatting', desc: 'Parse and format dates in any format' },
+                    ].map((func, index) => (
+                      <div key={index} className="bg-slate-800 rounded-lg p-4 hover:bg-slate-700 transition-colors">
+                        <h4 className="font-semibold text-white mb-1">{func.name}</h4>
+                        <p className="text-sm text-gray-400">{func.desc}</p>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Job Execution Pipeline Section */}
+      <section id="pipeline" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Transparent, Reliable Data Pipelines
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Monitor every step of your data journey in real-time
+            </p>
+          </motion.div>
+
+          <div className="max-w-6xl mx-auto">
+            {/* Execution Metrics Dashboard */}
+            <div className="bg-slate-800 rounded-xl p-6 mb-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-slate-900 rounded-lg p-4">
+                  <p className="text-sm text-gray-400 mb-1">Progress</p>
+                  <p className="text-2xl font-bold text-secondary-400">100%</p>
+                </div>
+                <div className="bg-slate-900 rounded-lg p-4">
+                  <p className="text-sm text-gray-400 mb-1">Records Processed</p>
+                  <p className="text-2xl font-bold text-white">551</p>
+                </div>
+                <div className="bg-slate-900 rounded-lg p-4">
+                  <p className="text-sm text-gray-400 mb-1">Total Records</p>
+                  <p className="text-2xl font-bold text-white">551</p>
+                </div>
+                <div className="bg-slate-900 rounded-lg p-4">
+                  <p className="text-sm text-gray-400 mb-1">Failed Records</p>
+                  <p className="text-2xl font-bold text-red-400">0</p>
+                </div>
+              </div>
+
+              {/* Timeline */}
+              <div className="flex items-center justify-between text-sm text-gray-400 border-t border-gray-700 pt-4">
+                <div>
+                  <span className="text-gray-500">Started:</span> 12/17/2025 1:53 AM
+                </div>
+                <div>
+                  <span className="text-gray-500">Completed:</span> 12/17/2025 1:54 AM
+                </div>
+                <div>
+                  <span className="text-gray-500">Duration:</span> 1 min
+                </div>
+              </div>
+            </div>
+
+            {/* Pipeline Stages */}
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {pipelineStages.map((stage, index) => (
+                <motion.div
+                  key={stage.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`relative bg-white rounded-xl p-6 border-2 ${
+                    stage.status === 'completed'
+                      ? 'border-secondary-400 shadow-lg shadow-secondary-100'
+                      : stage.status === 'skipped'
+                      ? 'border-gray-300'
+                      : 'border-accent-400 shadow-lg shadow-accent-100'
+                  }`}
+                >
+                  {/* Stage Number */}
+                  <div
+                    className={`absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm ${
+                      stage.status === 'completed'
+                        ? 'bg-secondary-500 text-white'
+                        : stage.status === 'skipped'
+                        ? 'bg-gray-400 text-white'
+                        : 'bg-accent-500 text-white'
+                    }`}
+                  >
+                    {index + 1}
+                  </div>
+
+                  {/* Icon */}
+                  <div className="text-3xl mb-3 text-center">{stage.icon}</div>
+
+                  {/* Stage Name */}
+                  <h3 className="font-bold text-gray-900 text-sm mb-2 text-center">{stage.name}</h3>
+                  <p className="text-xs text-gray-600 mb-4 text-center">{stage.description}</p>
+
+                  {/* Status Badge */}
+                  <div className="text-center">
+                    {stage.status === 'completed' && (
+                      <span className="inline-block px-2 py-1 bg-secondary-100 text-secondary-700 text-xs rounded-full">
+                        ✓ Complete
+                      </span>
+                    )}
+                    {stage.status === 'skipped' && (
+                      <span className="inline-block px-2 py-1 bg-gray-200 text-gray-600 text-xs rounded-full">
+                        Skipped
+                      </span>
+                    )}
+                    {stage.status === 'active' && (
+                      <span className="inline-block px-2 py-1 bg-accent-100 text-accent-700 text-xs rounded-full animate-pulse">
+                        In Progress
+                      </span>
+                    )}
+                  </div>
+
+                  {/* View Data Button */}
+                  {stage.status === 'completed' && (
+                    <button className="mt-4 w-full px-3 py-1 bg-slate-800 text-white text-xs rounded hover:bg-slate-700 transition-colors">
+                      View Data
+                    </button>
+                  )}
+
+                  {/* Connection Line */}
+                  {index < pipelineStages.length - 1 && (
+                    <div className="hidden lg:block absolute top-1/2 -right-4 w-4 h-0.5 bg-gray-300" />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Final Status */}
+            <div className="mt-8 text-center">
+              <button className="px-6 py-3 bg-accent-600 text-white rounded-lg font-semibold hover:bg-accent-700 transition-colors">
+                View Final Status & Audit Trail
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust & Credibility Section */}
+      <section className="py-16 bg-slate-800">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-6">
             {[
-              {
-                icon: '🔄',
-                title: 'Real-Time Sync',
-                description:
-                  'Keep your data synchronized across all platforms in real-time. No delays, no manual updates.',
-              },
-              {
-                icon: '🔒',
-                title: 'Secure & Compliant',
-                description:
-                  'Enterprise-grade security with full GDPR and SOC 2 compliance. Your data is always protected.',
-              },
-              {
-                icon: '⚡',
-                title: 'Lightning Fast',
-                description:
-                  'Process millions of records efficiently. Built for scale with optimized performance.',
-              },
+              { icon: '🔒', label: 'Enterprise-grade security' },
+              { icon: '⚡', label: '99.9% uptime SLA' },
+              { icon: '📊', label: 'Real-time monitoring' },
+              { icon: '📝', label: 'Comprehensive audit logs' },
+              { icon: '👥', label: 'Role-based access control' },
             ].map((feature, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-shadow"
+                className="text-center"
               >
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              How It Works
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Integrate your ecommerce data in minutes, not months
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {[
-              {
-                platform: 'Shopify',
-                icon: '🛍️',
-                description: 'Sync products, orders, and customer data from Shopify stores',
-              },
-              {
-                platform: 'WooCommerce',
-                icon: '🔌',
-                description: 'Connect WordPress WooCommerce sites seamlessly',
-              },
-              {
-                platform: 'Magento',
-                icon: '🏪',
-                description: 'Enterprise-grade integration for Magento platforms',
-              },
-              {
-                platform: 'BigCommerce',
-                icon: '📦',
-                description: 'Real-time data sync with BigCommerce stores',
-              },
-              {
-                platform: 'Salesforce',
-                icon: '☁️',
-                description: 'Push ecommerce data directly to Salesforce CRM',
-              },
-              {
-                platform: 'HubSpot',
-                icon: '📊',
-                description: 'Automate marketing workflows with HubSpot integration',
-              },
-            ].map((integration, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="bg-gradient-to-br from-primary-50 to-primary-100 p-6 rounded-lg border border-gray-200 hover:border-primary-400 transition-all"
-              >
-                <div className="text-4xl mb-3">{integration.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {integration.platform}
-                </h3>
-                <p className="text-gray-600 text-sm">{integration.description}</p>
+                <div className="text-4xl mb-3">{feature.icon}</div>
+                <p className="text-sm text-gray-300 font-medium">{feature.label}</p>
               </motion.div>
             ))}
           </div>
@@ -266,9 +736,12 @@ export default function DataIntegration() {
           >
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Register Your Interest
+                Ready to Streamline Your Data Integration?
               </h2>
-              <p className="text-xl text-gray-600">
+              <p className="text-xl text-gray-600 mb-2">
+                Join companies that trust us with their critical data flows
+              </p>
+              <p className="text-sm text-gray-500">
                 Get early access and exclusive updates about Data Nexus
               </p>
             </div>
@@ -357,6 +830,7 @@ export default function DataIntegration() {
                     <option value="woocommerce">WooCommerce</option>
                     <option value="magento">Magento</option>
                     <option value="bigcommerce">BigCommerce</option>
+                    <option value="commercetools">Commercetools</option>
                     <option value="custom">Custom Solution</option>
                     <option value="other">Other</option>
                   </select>
@@ -375,11 +849,11 @@ export default function DataIntegration() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">What are you looking for?</option>
-                    <option value="inventory">Inventory Sync</option>
-                    <option value="customer">Customer Data Integration</option>
-                    <option value="orders">Order Management</option>
-                    <option value="marketing">Marketing Automation</option>
-                    <option value="analytics">Analytics & Reporting</option>
+                    <option value="data-integration">Data Integration</option>
+                    <option value="api-connectors">API Connectors</option>
+                    <option value="cloud-storage">Cloud Storage Integration</option>
+                    <option value="real-time-sync">Real-time Data Sync</option>
+                    <option value="data-transformation">Data Transformation</option>
                     <option value="other">Other</option>
                   </select>
                   {errors.interest && (
@@ -399,14 +873,31 @@ export default function DataIntegration() {
                   </label>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Register Interest'}
-                </button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex-1 px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Start Free Trial'}
+                  </button>
+                  <Link
+                    href="/contact"
+                    className="flex-1 px-8 py-4 bg-white text-accent-700 border-2 border-accent-500 rounded-lg font-semibold hover:bg-accent-50 transition-colors text-center"
+                  >
+                    Schedule Demo
+                  </Link>
+                </div>
               </form>
+
+              <div className="mt-6 pt-6 border-t border-gray-200 text-center">
+                <p className="text-sm text-gray-500">
+                  <span className="inline-block px-2 py-1 bg-accent-100 text-accent-700 rounded text-xs font-medium mr-2">
+                    As seen in demo
+                  </span>
+                  2,000+ records processed in seconds
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -419,13 +910,13 @@ export default function DataIntegration() {
             Ready to Transform Your Data Integration?
           </h2>
           <p className="text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
-            Join hundreds of businesses already using Data Nexus to streamline their operations
+            Finally, a data integration tool that doesn't require a dedicated engineering team
           </p>
           <Link
             href="/contact"
             className="inline-block px-8 py-4 bg-white text-primary-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
           >
-            Contact Us
+            Contact Us Today
           </Link>
         </div>
       </section>
