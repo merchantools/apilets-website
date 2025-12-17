@@ -99,7 +99,6 @@ const pipelineStages = [
   { name: 'Raw Ingestion', description: 'Choose your data source', status: 'completed', icon: '📥' },
   { name: 'Data Quality', description: 'Validate and clean data', status: 'completed', icon: '✓' },
   { name: 'Data Correction', description: 'Correct data issues', status: 'skipped', icon: '🔧' },
-  { name: 'Data Grouping', description: 'Group and transform', status: 'completed', icon: '📊' },
   { name: 'Data Mapping', description: 'Map to target schema', status: 'completed', icon: '🔀' },
   { name: 'Final Load', description: 'Load to destination', status: 'completed', icon: '✅' },
 ];
@@ -683,7 +682,7 @@ export default function DataIntegration() {
             </div>
 
             {/* Pipeline Stages */}
-            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
               {pipelineStages.map((stage, index) => (
                 <motion.div
                   key={stage.name}

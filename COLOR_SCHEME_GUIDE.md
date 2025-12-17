@@ -174,7 +174,7 @@ base: '#fcfcfc'  // Off-white background
 
 // ❌ Bad - old theme colors
 <div className="bg-accent">...</div>  // Old accent was red
-<div className="text-blueZ">...</div>  // blueZ doesn't exist anymore
+<div className="text-accent-500">...</div>  // blueZ doesn't exist anymore
 ```
 
 ### ✅ Use Semantic Names
