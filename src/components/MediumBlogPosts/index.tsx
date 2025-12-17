@@ -59,7 +59,7 @@ export function MediumBlogPosts() {
                   }) : ''}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  <Link href={post.url} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 transition-colors">
+                  <Link href={post.url} target="_blank" rel="noopener noreferrer" className="hover:text-primary-600 transition-colors">
                     {post.title}
                   </Link>
                 </h3>
@@ -70,7 +70,7 @@ export function MediumBlogPosts() {
                   href={post.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
+                  className="text-primary-600 hover:text-primary-700 font-medium inline-flex items-center"
                 >
                   Read on Medium
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,7 +87,7 @@ export function MediumBlogPosts() {
             href="https://medium.com/@apilets"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-black hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-primary-500 hover:bg-primary-600 transition-colors"
           >
             View All Articles
             <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

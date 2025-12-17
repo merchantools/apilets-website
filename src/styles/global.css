@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply font-normal text-blueZ;
+  @apply font-normal text-secondary-500;
 }
 
 body {
@@ -11,7 +11,7 @@ body {
 }
 
 p {
-  @apply text-blueZ;
+  @apply text-secondary-500;
 }
 
 .sarath {
@@ -97,7 +97,7 @@ li.check:before {
 }
 
 .nav-dropdown-link {
-  @apply min-w-[150px] py-2.5 text-sm font-medium text-blueZ transition lg:hover:text-white whitespace-nowrap lg:hover:bg-accent px-4 rounded-lg;
+  @apply min-w-[150px] py-2.5 text-sm font-medium text-accent-500 transition lg:hover:text-white whitespace-nowrap lg:hover:bg-accent px-4 rounded-lg;
 
   &.active {
     @apply lg:bg-accent text-white;

@@ -26,7 +26,7 @@ export default function Landing() {
                                 wrapper="span"
                                 speed={20}
                                 repeat={Infinity}
-                                className="text-blue-400 sm:text-4xl md:text-5xl"
+                                className="text-primary-500 sm:text-4xl md:text-5xl"
                                 cursor={false}
                             ></TypeAnimation>
                             </h1>
