@@ -7,7 +7,7 @@ import { useSearchParams } from 'next/navigation';
 
 function ThankYouContent() {
   const searchParams = useSearchParams();
-  const email = searchParams.get('email') || 'your email';
+  const email = searchParams?.get('email') || 'your email';
 
   useEffect(() => {
     // Track conversion with Google Analytics
