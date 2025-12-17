@@ -16,7 +16,7 @@ const config: Config = {
         200: '#fce99c',
         300: '#fade6b',
         400: '#f9d339',
-        500: '#f7c708',  // Main primary color
+        500: '#f7c708',  // Main primary color (bright amber)
         600: '#c6a006',
         700: '#947805',
         800: '#635003',
@@ -24,14 +24,52 @@ const config: Config = {
         950: '#231c01',
         DEFAULT: '#f7c708',
       },
-      'secondary': '#646E68',  // Dark gray-green
-      'accent': '#f7c708',     // Bright amber (same as primary for consistency)
-      'highlight': '#fce99c',  // Light amber
-      'base': '#fcfcfc',       // White
+      'secondary': {
+        50: '#f4fee6',
+        100: '#e9fdce',
+        200: '#d2fc9c',
+        300: '#bcfa6b',
+        400: '#a6f939',
+        500: '#8ff708',  // Bright green
+        600: '#73c606',
+        700: '#569405',
+        800: '#396303',
+        900: '#1d3102',
+        950: '#142301',
+        DEFAULT: '#65AD05',
+      },
+      'accent': {
+        50: '#e7f8fd',
+        100: '#d0f0fb',
+        200: '#a1e2f7',
+        300: '#71d3f4',
+        400: '#42c4f0',
+        500: '#13b6ec',  // Cyan/Blue
+        600: '#0f91bd',
+        700: '#0b6d8e',
+        800: '#08495e',
+        900: '#04242f',
+        950: '#031921',
+        DEFAULT: '#0C7699',
+      },
+      'highlight': {
+        50: '#fffde6',
+        100: '#fefacd',
+        200: '#fef69a',
+        300: '#fdf168',
+        400: '#fdec35',
+        500: '#fce803',  // Bright yellow
+        600: '#cab902',
+        700: '#978b02',
+        800: '#655d01',
+        900: '#322e01',
+        950: '#232000',
+        DEFAULT: '#FCEA10',
+      },
+      'base': '#fcfcfc',  // White
     },
     fontFamily: {
       roboto: ['Roboto', 'sans-serif'],
-      blueZ: ['#393a72', 'sans-serif'],
     },
     accentColor: ({ theme }) => ({
       ...theme('colors'),
@@ -206,10 +244,6 @@ const config: Config = {
         fuchsia: colors.fuchsia,
         pink: colors.pink,
         rose: colors.rose,
-        accent: '#B80000',
-        redZ: '#F04545',
-        blueZ: '#131A3C',
-        blacklightZ: '#27292E',
       },
     },
 
