@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 
 import Head from 'next/head';
 import Footer from '../components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 const manrope = Manrope({
   display: 'swap',
@@ -43,6 +44,7 @@ export default function RootLayout({
         </Head>
 
         <body className={manrope.className}>
+          <GoogleAnalytics />
           <div className='relative min-h-screen flex flex-col leading-normal text-gray-600'>
             <div
               className='fixed top-0 left-0 right-0 bottom-0 -z-10

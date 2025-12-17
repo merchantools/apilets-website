@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 const menuItems = [
   { name: 'Home', link: '/' },
   { name: 'What We Do', link: '/what-we-do' },
+  { name: 'Data Integration', link: '/data-integration' },
   { name: 'Contact Us', link: '/contact' },
 ];
 
