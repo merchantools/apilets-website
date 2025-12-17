@@ -57,18 +57,31 @@ type FormData = z.infer<typeof formSchema>;
 
 // Connection types data
 const connectionTypes = [
-  {
+    {
+        category: 'Featured Connections',
+        items: [
+            { name: 'Commercetools', description: 'E-commerce platform API', icon: '🛍️' },
+            { name: 'SAP Hybris', description: 'E-commerce platform Database', icon: '🛍️' },
+            { name: 'Klaviyo', description: 'Email Marketing Platform', icon: '🛍️' },
+            { name: 'SendGrid', description: 'Email Marketing Platform', icon: '📧' },
+            { name: 'Salesforce', description: 'CRM Platform', icon: 'CRM' },
+        ],
+    },
+    {
     category: 'DATABASE',
     items: [
       { name: 'PostgreSQL', description: 'PostgreSQL relational database', icon: '🗄️' },
       { name: 'MySQL', description: 'MySQL relational database', icon: '🗄️' },
+      { name: 'SQL Server', description: 'SQL Server relational database', icon: '🗄️' },
+      { name: 'SAP Hana', description: 'SAP Hana relational database', icon: '🗄️' },
+      { name: 'Oracle', description: 'Oracle relational database', icon: '🗄️' },
     ],
   },
   {
     category: 'NOSQL DATABASE',
     items: [
-      { name: 'MongoDB', description: 'MongoDB document database', icon: '🍃' },
-      { name: 'Redis', description: 'Redis key-value store', icon: '⚡' },
+      { name: 'MongoDB', description: 'MongoDB document database', icon: '📊' },
+      { name: 'Redis', description: 'Redis key-value store', icon: '📊' },
     ],
   },
   {
@@ -82,14 +95,12 @@ const connectionTypes = [
   {
     category: 'FILE STORAGE',
     items: [
-      { name: 'Local File System', description: 'Local file system storage', icon: '📁' },
       { name: 'SFTP Server', description: 'Secure File Transfer Protocol server', icon: '🔐' },
     ],
   },
   {
     category: 'API CONNECTORS',
     items: [
-      { name: 'Commercetools', description: 'E-commerce platform API', icon: '🛍️' },
       { name: 'REST API', description: 'Generic REST API endpoints', icon: '🔌' },
       { name: 'Webhooks', description: 'Real-time webhook endpoints', icon: '⚡' },
     ],
@@ -214,8 +225,8 @@ export default function DataIntegration() {
             </p>
 
             {/* 4-Step Process Preview */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto">
-              {['Select', 'Configure', 'Credentials', 'Test'].map((step, index) => (
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8 max-w-3xl mx-auto">
+              {['Connect', 'Configure', 'Test', 'Schedule', 'Run'].map((step, index) => (
                 <motion.div
                   key={step}
                   initial={{ opacity: 0, y: 20 }}
