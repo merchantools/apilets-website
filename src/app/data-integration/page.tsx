@@ -702,19 +702,32 @@ export default function DataIntegration() {
           <div className="max-w-6xl mx-auto">
             {/* Execution Metrics Dashboard */}
             <div className="bg-slate-800 rounded-xl p-6 mb-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
                 <div className="bg-slate-900 rounded-lg p-4">
-                  <p className="text-sm text-gray-400 mb-1">Progress</p>
+                  <p className="text-sm text-gray-400 mb-1">Raw Ingestion</p>
+                  <p className="text-sm text-secondary-700 mb-1">46000 records</p>
                   <p className="text-2xl font-bold text-secondary-400">100%</p>
                 </div>
                 <div className="bg-slate-900 rounded-lg p-4">
-                  <p className="text-sm text-gray-400 mb-1">Records Processed</p>
-                  <p className="text-2xl font-bold text-white">551</p>
+                  <p className="text-sm text-gray-400 mb-1">Data Quality</p>
+                  <p className="text-sm text-secondary-700 mb-1">46000 records</p>
+                  <p className="text-2xl font-bold text-secondary-400">100%</p>
                 </div>
                 <div className="bg-slate-900 rounded-lg p-4">
-                  <p className="text-sm text-gray-400 mb-1">Total Records</p>
-                  <p className="text-2xl font-bold text-white">551</p>
+                  <p className="text-sm text-gray-400 mb-1">Data Correction</p>
+                  <p className="text-sm text-secondary-700 mb-1">46000 records</p>
+                  <p className="text-2xl font-bold text-secondary-400">100%</p>
                 </div>
+                  <div className="bg-slate-900 rounded-lg p-4">
+                      <p className="text-sm text-gray-400 mb-1">Map & Aggregate</p>
+                      <p className="text-sm text-secondary-700 mb-1">11500 records</p>
+                      <p className="text-2xl font-bold text-secondary-400">100%</p>
+                  </div>
+                  <div className="bg-slate-900 rounded-lg p-4">
+                      <p className="text-sm text-gray-400 mb-1">Data Loading</p>
+                      <p className="text-sm text-secondary-700 mb-1">11500 records</p>
+                      <p className="text-2xl font-bold text-secondary-400">100%</p>
+                  </div>
                 <div className="bg-slate-900 rounded-lg p-4">
                   <p className="text-sm text-gray-400 mb-1">Failed Records</p>
                   <p className="text-2xl font-bold text-red-400">0</p>
@@ -730,7 +743,7 @@ export default function DataIntegration() {
                   <span className="text-gray-500">Completed:</span> 12/17/2025 1:54 AM
                 </div>
                 <div>
-                  <span className="text-gray-500">Duration:</span> 1 min
+                  <span className="text-gray-500">Duration:</span> 1 min 26 seconds
                 </div>
               </div>
             </div>
