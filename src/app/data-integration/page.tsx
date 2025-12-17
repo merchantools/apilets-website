@@ -896,7 +896,7 @@ export default function DataIntegration() {
                     disabled={isSubmitting}
                     className="flex-1 px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Start Free Trial'}
+                    {isSubmitting ? 'Submitting...' : 'Register your interest'}
                   </button>
                   <Link
                     href="/contact"
