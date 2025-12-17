@@ -9,7 +9,9 @@ import Link from 'next/link';
 
 // Configuration for Google Apps Script integration
 const FORM_CONFIG = {
-  GOOGLE_SCRIPT_URL: '[PLACEHOLDER_URL]', // Replace with your Google Apps Script deployment URL
+  // GOOGLE_SCRIPT_URL: '[https://script.google.com/a/macros/apilets.com/s/AKfycbzdbfFTq6xyZAajXxJo92r7YCgcutc1ke49JiDcSCl8ZyyG3Ek20RkV9L6YlB4wkkhO/exec]', // Replace with your Google Apps Script deployment URL
+  // GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/library/d/1q3hf3cbKB5voWxMXzpkXsd5xpLBVEshCNDE1sXsF7IDap7zMrQpoHtKs/3', // Replace with your Google Apps Script deployment URL
+  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwbqHjDPmb9R-65my-JrBifQ50rQRWk2-zsel451XwYGT4tdU3gLx-HZjQx5Lp26R67/exec',
   COMPANY_NAME: 'Apilets',
   CONTACT_EMAIL: 'info@apilets.com',
   SUCCESS_MESSAGE_DURATION: 5000,
