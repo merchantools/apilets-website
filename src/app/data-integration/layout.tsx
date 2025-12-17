@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: 'Connect Your Ecommerce Data Anywhere - Data Nexus | apilets',
@@ -61,5 +62,8 @@ export default function DataIntegrationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <>
+      <GoogleAnalytics />
+      {children}
+  </>;
 }
