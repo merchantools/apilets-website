@@ -7,14 +7,47 @@ import { z } from 'zod';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+// Configuration for Google Apps Script integration
+const FORM_CONFIG = {
+  GOOGLE_SCRIPT_URL: '[PLACEHOLDER_URL]', // Replace with your Google Apps Script deployment URL
+  COMPANY_NAME: 'Apilets',
+  CONTACT_EMAIL: 'info@apilets.com',
+  SUCCESS_MESSAGE_DURATION: 5000,
+
+  PLATFORMS: [
+    'Shopify',
+    'BigCommerce',
+    'Magento',
+    'WooCommerce',
+    'Commercetools',
+    'SAP Hybris',
+    'Custom Built',
+    'Other',
+  ],
+
+  INTERESTS: [
+    'Reverse ETL',
+    'Real-time Inventory Sync',
+    'Data Migration',
+    'Custom Integration',
+    'Ecommerce Data Integration',
+    'Schedule a Demo',
+    'Just Exploring',
+  ],
+};
+
 // Form validation schema
 const formSchema = z.object({
   fullName: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Please enter a valid email address'),
-  company: z.string().min(2, 'Company name is required'),
-  platform: z.string().min(1, 'Please select a platform'),
-  brief: z.string().min(1, 'Please provide a brief description of your system'),
-  interest: z.string().min(1, 'Please select an area of interest'),
+  company: z.string().optional(),
+  phone: z.string().optional().refine(
+    (val) => !val || /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/.test(val),
+    { message: 'Please enter a valid phone number' }
+  ),
+  platform: z.string().optional(),
+  brief: z.string().max(500, 'Description must be less than 500 characters').optional(),
+  interest: z.string().optional(),
   newsletter: z.boolean().default(false),
 });
 
@@ -66,6 +99,7 @@ const pipelineStages = [
   { name: 'Raw Ingestion', description: 'Choose your data source', status: 'completed', icon: '📥' },
   { name: 'Data Quality', description: 'Validate and clean data', status: 'completed', icon: '✓' },
   { name: 'Data Correction', description: 'Correct data issues', status: 'skipped', icon: '🔧' },
+  { name: 'Data Grouping', description: 'Group and transform', status: 'completed', icon: '📊' },
   { name: 'Data Mapping', description: 'Map to target schema', status: 'completed', icon: '🔀' },
   { name: 'Final Load', description: 'Load to destination', status: 'completed', icon: '✅' },
 ];
@@ -73,6 +107,8 @@ const pipelineStages = [
 export default function DataIntegration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [submittedEmail, setSubmittedEmail] = useState<string>('');
   const [selectedTab, setSelectedTab] = useState<'visual' | 'advanced' | 'functions'>('visual');
 
   const {
@@ -84,32 +120,62 @@ export default function DataIntegration() {
     resolver: zodResolver(formSchema),
   });
 
+  // Auto-hide success message after configured duration
+  useEffect(() => {
+    if (submitStatus === 'success') {
+      const timer = setTimeout(() => {
+        setSubmitStatus('idle');
+      }, FORM_CONFIG.SUCCESS_MESSAGE_DURATION);
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
+
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
     try {
-      const response = await fetch('/api/data-integration', {
+      // Prepare payload matching Google Apps Script requirements
+      const payload = {
+        fullName: data.fullName,
+        email: data.email,
+        company: data.company || '',
+        phone: data.phone || '',
+        platform: data.platform || '',
+        brief: data.brief || '',
+        interest: data.interest || '',
+        newsletter: data.newsletter || false,
+      };
+
+      // Submit to Google Apps Script
+      // Note: Using no-cors mode as required by Google Apps Script
+      await fetch(FORM_CONFIG.GOOGLE_SCRIPT_URL, {
         method: 'POST',
+        mode: 'no-cors', // Required for Google Apps Script
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        reset();
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'form_submit', {
-            event_category: 'engagement',
-            event_label: 'data_nexus_lead_form',
-          });
-        }
-      } else {
-        setSubmitStatus('error');
+      // Since no-cors doesn't allow reading response, assume success if no error thrown
+      setSubmittedEmail(data.email);
+      setSubmitStatus('success');
+      reset();
+
+      // Track with Google Analytics if available
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'form_submit', {
+          event_category: 'engagement',
+          event_label: 'data_nexus_registration',
+        });
       }
     } catch (error) {
+      console.error('Form submission error:', error);
+      setErrorMessage(
+        'Connection failed. Please check your internet and try again.'
+      );
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -136,7 +202,7 @@ export default function DataIntegration() {
             className="max-w-4xl mx-auto text-center"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Connect Your Data{' '}
+              Connect Your Ecommerce Data{' '}
               <span className="text-primary-600">Anywhere</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-4">
@@ -148,7 +214,7 @@ export default function DataIntegration() {
 
             {/* 4-Step Process Preview */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto">
-              {['Connect', 'Configure', 'Schedule', 'Load'].map((step, index) => (
+              {['Select', 'Configure', 'Credentials', 'Test'].map((step, index) => (
                 <motion.div
                   key={step}
                   initial={{ opacity: 0, y: 20 }}
@@ -159,7 +225,7 @@ export default function DataIntegration() {
                   <div className="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold mx-auto mb-2">
                     {index + 1}
                   </div>
-                  <p className="text-sm font-medium text-accent-700">{step}</p>
+                  <p className="text-sm font-medium text-gray-700">{step}</p>
                 </motion.div>
               ))}
             </div>
@@ -617,7 +683,7 @@ export default function DataIntegration() {
             </div>
 
             {/* Pipeline Stages */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
               {pipelineStages.map((stage, index) => (
                 <motion.div
                   key={stage.name}
@@ -751,9 +817,13 @@ export default function DataIntegration() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800"
+                  className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
                 >
-                  ✓ Thank you! We'll be in touch soon.
+                  <p className="text-green-800 font-semibold mb-2">✓ Thank you for registering!</p>
+                  <p className="text-green-700 text-sm">
+                    We've sent a verification email to <strong>{submittedEmail}</strong>.
+                    Please check your inbox (and spam folder) and click the verification link to complete your registration.
+                  </p>
                 </motion.div>
               )}
 
@@ -761,123 +831,151 @@ export default function DataIntegration() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800"
+                  className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg"
                 >
-                  ✗ Something went wrong. Please try again.
+                  <p className="text-red-800 font-semibold mb-1">✗ Submission Failed</p>
+                  <p className="text-red-700 text-sm">
+                    {errorMessage || `Something went wrong. Please try again or email us at ${FORM_CONFIG.CONTACT_EMAIL}`}
+                  </p>
                 </motion.div>
               )}
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    {...register('fullName')}
-                    type="text"
-                    id="fullName"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="John Doe"
-                  />
-                  {errors.fullName && (
-                    <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    {...register('email')}
-                    type="email"
-                    id="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="john@company.com"
-                  />
-                  {errors.email && (
-                    <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                    Company *
-                  </label>
-                  <input
-                    {...register('company')}
-                    type="text"
-                    id="company"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Company Name"
-                  />
-                  {errors.company && (
-                    <p className="mt-1 text-sm text-red-600">{errors.company.message}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="platform" className="block text-sm font-medium text-gray-700 mb-2">
-                    Platform *
-                  </label>
-                  <select
-                    {...register('platform')}
-                    id="platform"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">Select your platform</option>
-                    <option value="legacy-sql">Legacy System (SQL)</option>
-                    <option value="legacy-files">Legacy System (Files)</option>
-                    <option value="shopify">Shopify Commerce</option>
-                    <option value="woocommerce">WooCommerce</option>
-                    <option value="magento">Magento</option>
-                    <option value="sap-hybris">SAP Hybris</option>
-                    <option value="commercetools">Commercetools</option>
-                    <option value="custom">Custom Solution</option>
-                    <option value="other">Other</option>
-                  </select>
-                  {errors.platform && (
-                    <p className="mt-1 text-sm text-red-600">{errors.platform.message}</p>
-                  )}
-                </div>
-
+                {/* Row 1: Full Name & Email */}
+                <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                      <label htmlFor="brief" className="block text-sm font-medium text-gray-700 mb-2">
-                          Brief System Description
-                      </label>
-                      <textarea
-                          {...register('brief')}
-                          id="brief"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      />
-                      {errors.brief && (
-                          <p className="mt-1 text-sm text-red-600">{errors.brief.message}</p>
-                      )}
+                    <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name *
+                    </label>
+                    <input
+                      {...register('fullName')}
+                      type="text"
+                      id="fullName"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="John Doe"
+                    />
+                    {errors.fullName && (
+                      <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+                    )}
                   </div>
 
-                <div>
-                  <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
-                    Primary Interest *
-                  </label>
-                  <select
-                    {...register('interest')}
-                    id="interest"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  >
-                    <option value="">What are you looking for?</option>
-                    <option value="data-integration">Data Integration</option>
-                    <option value="api-connectors">API Connectors</option>
-                    <option value="cloud-storage">Machine Learning Flow</option>
-                    <option value="real-time-sync">Real-time Data Sync</option>
-                    <option value="data-transformation">Data Transformation</option>
-                    <option value="data-cleansing">Data Cleansing</option>
-                    <option value="other">Other</option>
-                  </select>
-                  {errors.interest && (
-                    <p className="mt-1 text-sm text-red-600">{errors.interest.message}</p>
-                  )}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      {...register('email')}
+                      type="email"
+                      id="email"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="john@company.com"
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                    )}
+                  </div>
                 </div>
 
+                {/* Row 2: Company & Phone */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
+                      Company
+                    </label>
+                    <input
+                      {...register('company')}
+                      type="text"
+                      id="company"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="Company Name"
+                    />
+                    {errors.company && (
+                      <p className="mt-1 text-sm text-red-600">{errors.company.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number
+                    </label>
+                    <input
+                      {...register('phone')}
+                      type="tel"
+                      id="phone"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Row 3: Platform & Interest */}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="platform" className="block text-sm font-medium text-gray-700 mb-2">
+                      Current Platform
+                    </label>
+                    <select
+                      {...register('platform')}
+                      id="platform"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    >
+                      <option value="">Select platform...</option>
+                      {FORM_CONFIG.PLATFORMS.map((platform) => (
+                        <option key={platform} value={platform}>
+                          {platform}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.platform && (
+                      <p className="mt-1 text-sm text-red-600">{errors.platform.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
+                      I'm interested in
+                    </label>
+                    <select
+                      {...register('interest')}
+                      id="interest"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    >
+                      <option value="">Select option...</option>
+                      {FORM_CONFIG.INTERESTS.map((interest) => (
+                        <option key={interest} value={interest}>
+                          {interest}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.interest && (
+                      <p className="mt-1 text-sm text-red-600">{errors.interest.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Row 4: Brief Description */}
+                <div>
+                  <label htmlFor="brief" className="block text-sm font-medium text-gray-700 mb-2">
+                    Tell us about your needs <span className="text-gray-500 font-normal">(optional)</span>
+                  </label>
+                  <textarea
+                    {...register('brief')}
+                    id="brief"
+                    rows={3}
+                    maxLength={500}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"
+                    placeholder="Brief description of your integration requirements..."
+                  />
+                  {errors.brief && (
+                    <p className="mt-1 text-sm text-red-600">{errors.brief.message}</p>
+                  )}
+                  <p className="mt-1 text-xs text-gray-500">Maximum 500 characters</p>
+                </div>
+
+                {/* Row 5: Newsletter Checkbox */}
                 <div className="flex items-start">
                   <input
                     {...register('newsletter')}
@@ -886,7 +984,7 @@ export default function DataIntegration() {
                     className="mt-1 h-4 w-4 text-primary-500 border-gray-300 rounded focus:ring-primary-500"
                   />
                   <label htmlFor="newsletter" className="ml-2 text-sm text-gray-600">
-                    Yes, I'd like to receive updates and product news via email
+                    Subscribe to our newsletter for data integration tips and updates
                   </label>
                 </div>
 
@@ -896,7 +994,7 @@ export default function DataIntegration() {
                     disabled={isSubmitting}
                     className="flex-1 px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Register your interest'}
+                    {isSubmitting ? 'Submitting...' : 'Get Started'}
                   </button>
                   <Link
                     href="/contact"
