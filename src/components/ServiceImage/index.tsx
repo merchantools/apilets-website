@@ -17,7 +17,7 @@ export function ServiceImage({ item }: ServiceImageProps) {
           alt={item.title}
         />
       ) : (
-        <div className="w-full h-full bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl" />
+        <div className="w-full h-full bg-gradient-to-br from-primary-400 to-primary-600 rounded-xl" />
       )}
     </div>
   );

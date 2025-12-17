@@ -9,23 +9,25 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    // colors: {
-    //   'primary': '#393a72',    // Dark Blue/Purple
-    //   // 'primary': '#646E68',    // Dark Blue/Purple
-    //   'secondary': '#a6a465',  // Sage Green
-    //   'accent': '#f8c811',     // Yellow
-    //   'highlight': '#6061ad',  // Purple
-    //   'base': '#fcfcfc',      // White
-    //   blueZ: '#393a72',
-    // },
     colors: {
-      // 'primary': '#393a72',    // Dark Blue/Purple
-      'primary': '#646E68',    // Dark Blue/Purple
-      'secondary': '#a6a465',  // Sage Green
-      'accent': '#B48EAE',     // Yellow
-      'highlight': '#6061ad',  // Purple
-      'base': '#646E68',      // White
-      blueZ: '#393a72',
+      'primary': {
+        50: '#fef9e6',
+        100: '#fdf4ce',
+        200: '#fce99c',
+        300: '#fade6b',
+        400: '#f9d339',
+        500: '#f7c708',  // Main primary color
+        600: '#c6a006',
+        700: '#947805',
+        800: '#635003',
+        900: '#312802',
+        950: '#231c01',
+        DEFAULT: '#f7c708',
+      },
+      'secondary': '#646E68',  // Dark gray-green
+      'accent': '#f7c708',     // Bright amber (same as primary for consistency)
+      'highlight': '#fce99c',  // Light amber
+      'base': '#fcfcfc',       // White
     },
     fontFamily: {
       roboto: ['Roboto', 'sans-serif'],

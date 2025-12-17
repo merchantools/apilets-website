@@ -48,14 +48,14 @@ export default function RootLayout({
           <div className='relative min-h-screen flex flex-col leading-normal text-gray-600'>
             <div
               className='fixed top-0 left-0 right-0 bottom-0 -z-10
-            bg-gradient-to-br from-purple-200 from-30% via-cyan-200 via-50% to-pink-200 to-80% animate-gradient bg-[length:400%_400%] bg-opacity-10'
+            bg-gradient-to-br from-primary-100 from-30% via-primary-200 via-50% to-primary-300 to-80% animate-gradient bg-[length:400%_400%] bg-opacity-10'
               style={{
                 animation: 'gradient 8s ease infinite',
               }}
             />
             <div
               className='fixed top-0 left-0 right-0 bottom-0 -z-30 bg-opacity-30
-            bg-gradient-to-tr from-purple-200 from-30% via-cyan-200 via-50% to-pink-200 to-80% animate-gradient bg-[length:500%_500%]'
+            bg-gradient-to-tr from-primary-100 from-30% via-primary-200 via-50% to-primary-300 to-80% animate-gradient bg-[length:500%_500%]'
               style={{
                 animation: 'gradient 8s ease infinite',
               }}

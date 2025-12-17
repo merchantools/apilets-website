@@ -85,7 +85,7 @@ export default function DataIntegration() {
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200 opacity-60" />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -95,7 +95,7 @@ export default function DataIntegration() {
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
               Connect Your Ecommerce Data{' '}
-              <span className="text-blue-600">Anywhere</span>
+              <span className="text-primary-600">Anywhere</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-8">
               Seamlessly integrate data from your ecommerce platforms. Sync with marketing and CRM systems in real-time.
@@ -111,13 +111,13 @@ export default function DataIntegration() {
                     });
                   }
                 }}
-                className="px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+                className="px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg"
               >
                 Get Started
               </button>
               <button
                 onClick={() => scrollToSection('how-it-works')}
-                className="px-8 py-4 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                className="px-8 py-4 bg-white text-primary-700 border-2 border-primary-500 rounded-lg font-semibold hover:bg-primary-50 transition-colors"
               >
                 Learn More
               </button>
@@ -241,7 +241,7 @@ export default function DataIntegration() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-lg border border-gray-200 hover:border-blue-300 transition-all"
+                className="bg-gradient-to-br from-primary-50 to-primary-100 p-6 rounded-lg border border-gray-200 hover:border-primary-400 transition-all"
               >
                 <div className="text-4xl mb-3">{integration.icon}</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -303,7 +303,7 @@ export default function DataIntegration() {
                     {...register('fullName')}
                     type="text"
                     id="fullName"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="John Doe"
                   />
                   {errors.fullName && (
@@ -319,7 +319,7 @@ export default function DataIntegration() {
                     {...register('email')}
                     type="email"
                     id="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="john@company.com"
                   />
                   {errors.email && (
@@ -335,7 +335,7 @@ export default function DataIntegration() {
                     {...register('company')}
                     type="text"
                     id="company"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     placeholder="Company Name"
                   />
                   {errors.company && (
@@ -350,7 +350,7 @@ export default function DataIntegration() {
                   <select
                     {...register('platform')}
                     id="platform"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select your platform</option>
                     <option value="shopify">Shopify</option>
@@ -372,7 +372,7 @@ export default function DataIntegration() {
                   <select
                     {...register('interest')}
                     id="interest"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">What are you looking for?</option>
                     <option value="inventory">Inventory Sync</option>
@@ -392,7 +392,7 @@ export default function DataIntegration() {
                     {...register('newsletter')}
                     type="checkbox"
                     id="newsletter"
-                    className="mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                    className="mt-1 h-4 w-4 text-primary-500 border-gray-300 rounded focus:ring-primary-500"
                   />
                   <label htmlFor="newsletter" className="ml-2 text-sm text-gray-600">
                     Yes, I'd like to receive updates and product news via email
@@ -402,7 +402,7 @@ export default function DataIntegration() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-8 py-4 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-8 py-4 bg-primary-500 text-gray-900 rounded-lg font-semibold hover:bg-primary-600 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Submitting...' : 'Register Interest'}
                 </button>
@@ -413,17 +413,17 @@ export default function DataIntegration() {
       </section>
 
       {/* Footer CTA */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600">
+      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-700">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Ready to Transform Your Data Integration?
           </h2>
-          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
             Join hundreds of businesses already using Data Nexus to streamline their operations
           </p>
           <Link
             href="/contact"
-            className="inline-block px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
+            className="inline-block px-8 py-4 bg-white text-primary-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
           >
             Contact Us
           </Link>

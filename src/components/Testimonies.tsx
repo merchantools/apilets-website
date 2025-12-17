@@ -1,7 +1,7 @@
 const Tweet = ({ name, position, text, photoLink, tweetLink }: any) => {
   return (
     <div className='relative group'>
-      <div className='absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200' />
+      <div className='absolute transition rounded-lg opacity-25 -inset-1 bg-gradient-to-r from-primary-400 to-primary-600 blur duration-400 group-hover:opacity-100 group-hover:duration-200' />
       <a href={tweetLink} className='cursor-pointer'>
         <div className='relative p-6 space-y-6 leading-none rounded-lg bg-slate-800 ring-1 ring-gray-900/5 highlight'>
           <div className='flex items-center space-x-4'>
@@ -28,7 +28,7 @@ export default function Testimonies() {
       <div className='max-w-6xl mx-8 md:mx-10 lg:mx-20 xl:mx-auto'>
         <div className='transition duration-500 ease-in-out transform scale-100 translate-x-0 translate-y-0 opacity-100'>
           <div className='mb-12 space-y-5 md:mb-16 md:text-center'>
-            <div className='inline-block px-3 py-1 text-sm font-semibold text-indigo-100 rounded-lg md:text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40'>
+            <div className='inline-block px-3 py-1 text-sm font-semibold text-primary-100 rounded-lg md:text-center text-cn bg-[#202c47] bg-opacity-60 hover:cursor-pointer hover:bg-opacity-40'>
               Words from Others
             </div>
             <h1 className='mb-5 text-3xl font-semibold text-white md:text-center md:text-5xl'>
