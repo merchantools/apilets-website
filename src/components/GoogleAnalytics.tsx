@@ -2,19 +2,14 @@
 
 import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 
-export default function GoogleAnalytics() {
-  // Replace with your actual GA4 tracking ID
-  // Set this in your .env.local file as NEXT_PUBLIC_GA_MEASUREMENT_ID
-  const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+
+// Component that uses useSearchParams - must be wrapped in Suspense
+function AnalyticsTracker() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  // Don't load analytics in development unless explicitly enabled
-  if (process.env.NODE_ENV === 'development' && !process.env.NEXT_PUBLIC_GA_DEBUG) {
-    return null;
-  }
 
   // Track page views when route changes
   useEffect(() => {
@@ -34,10 +29,22 @@ export default function GoogleAnalytics() {
         });
       }
     }
-  }, [pathname, searchParams, GA_MEASUREMENT_ID]);
+  }, [pathname, searchParams]);
+
+  return null;
+}
+
+export default function GoogleAnalytics() {
+  // Don't load analytics in development unless explicitly enabled
+  if (process.env.NODE_ENV === 'development' && !process.env.NEXT_PUBLIC_GA_DEBUG) {
+    return null;
+  }
 
   return (
     <>
+      <Suspense fallback={null}>
+        <AnalyticsTracker />
+      </Suspense>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
