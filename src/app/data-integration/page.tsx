@@ -13,6 +13,7 @@ const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
   company: z.string().min(2, 'Company name is required'),
   platform: z.string().min(1, 'Please select a platform'),
+  brief: z.string().min(1, 'Please provide a brief description of your system'),
   interest: z.string().min(1, 'Please select an area of interest'),
   newsletter: z.boolean().default(false),
 });
@@ -65,7 +66,6 @@ const pipelineStages = [
   { name: 'Raw Ingestion', description: 'Choose your data source', status: 'completed', icon: '📥' },
   { name: 'Data Quality', description: 'Validate and clean data', status: 'completed', icon: '✓' },
   { name: 'Data Correction', description: 'Correct data issues', status: 'skipped', icon: '🔧' },
-  { name: 'Data Grouping', description: 'Group and transform', status: 'completed', icon: '📊' },
   { name: 'Data Mapping', description: 'Map to target schema', status: 'completed', icon: '🔀' },
   { name: 'Final Load', description: 'Load to destination', status: 'completed', icon: '✅' },
 ];
@@ -136,7 +136,7 @@ export default function DataIntegration() {
             className="max-w-4xl mx-auto text-center"
           >
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              Connect Your Ecommerce Data{' '}
+              Connect Your Data{' '}
               <span className="text-primary-600">Anywhere</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 mb-4">
@@ -148,7 +148,7 @@ export default function DataIntegration() {
 
             {/* 4-Step Process Preview */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 max-w-3xl mx-auto">
-              {['Select', 'Configure', 'Credentials', 'Test'].map((step, index) => (
+              {['Connect', 'Configure', 'Schedule', 'Load'].map((step, index) => (
                 <motion.div
                   key={step}
                   initial={{ opacity: 0, y: 20 }}
@@ -159,7 +159,7 @@ export default function DataIntegration() {
                   <div className="w-10 h-10 rounded-full bg-accent-500 text-white flex items-center justify-center font-bold mx-auto mb-2">
                     {index + 1}
                   </div>
-                  <p className="text-sm font-medium text-gray-700">{step}</p>
+                  <p className="text-sm font-medium text-accent-700">{step}</p>
                 </motion.div>
               ))}
             </div>
@@ -617,7 +617,7 @@ export default function DataIntegration() {
             </div>
 
             {/* Pipeline Stages */}
-            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
               {pipelineStages.map((stage, index) => (
                 <motion.div
                   key={stage.name}
@@ -818,7 +818,7 @@ export default function DataIntegration() {
 
                 <div>
                   <label htmlFor="platform" className="block text-sm font-medium text-gray-700 mb-2">
-                    Ecommerce Platform *
+                    Platform *
                   </label>
                   <select
                     {...register('platform')}
@@ -826,10 +826,12 @@ export default function DataIntegration() {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   >
                     <option value="">Select your platform</option>
-                    <option value="shopify">Shopify</option>
+                    <option value="legacy-sql">Legacy System (SQL)</option>
+                    <option value="legacy-files">Legacy System (Files)</option>
+                    <option value="shopify">Shopify Commerce</option>
                     <option value="woocommerce">WooCommerce</option>
                     <option value="magento">Magento</option>
-                    <option value="bigcommerce">BigCommerce</option>
+                    <option value="sap-hybris">SAP Hybris</option>
                     <option value="commercetools">Commercetools</option>
                     <option value="custom">Custom Solution</option>
                     <option value="other">Other</option>
@@ -838,6 +840,20 @@ export default function DataIntegration() {
                     <p className="mt-1 text-sm text-red-600">{errors.platform.message}</p>
                   )}
                 </div>
+
+                  <div>
+                      <label htmlFor="brief" className="block text-sm font-medium text-gray-700 mb-2">
+                          Brief System Description
+                      </label>
+                      <textarea
+                          {...register('brief')}
+                          id="brief"
+                          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      />
+                      {errors.brief && (
+                          <p className="mt-1 text-sm text-red-600">{errors.brief.message}</p>
+                      )}
+                  </div>
 
                 <div>
                   <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
@@ -851,9 +867,10 @@ export default function DataIntegration() {
                     <option value="">What are you looking for?</option>
                     <option value="data-integration">Data Integration</option>
                     <option value="api-connectors">API Connectors</option>
-                    <option value="cloud-storage">Cloud Storage Integration</option>
+                    <option value="cloud-storage">Machine Learning Flow</option>
                     <option value="real-time-sync">Real-time Data Sync</option>
                     <option value="data-transformation">Data Transformation</option>
+                    <option value="data-cleansing">Data Cleansing</option>
                     <option value="other">Other</option>
                   </select>
                   {errors.interest && (
