@@ -190,6 +190,7 @@ export default function DataIntegration() {
       // Track with Google Analytics if available
       if (typeof window !== 'undefined' && (window as any).gtag) {
         (window as any).gtag('event', 'form_submit', {
+<<<<<<< HEAD
           event_category: 'conversion',
           event_label: 'data_integration_registration',
           page_path: '/data-integration',
@@ -203,6 +204,10 @@ export default function DataIntegration() {
           event_category: 'conversion',
           event_label: 'data_integration_lead',
           page_path: '/data-integration',
+=======
+          event_category: 'engagement',
+          event_label: 'data_nexus_registration',
+>>>>>>> master
         });
       }
     } catch (error) {
@@ -1063,7 +1068,7 @@ export default function DataIntegration() {
                   <span className="inline-block px-2 py-1 bg-accent-100 text-accent-700 rounded text-xs font-medium mr-2">
                     As seen in demo
                   </span>
-                  2,000+ records processed in seconds
+                  thousands of records processed in seconds
                 </p>
               </div>
             </div>
