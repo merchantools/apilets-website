@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply font-normal text-secondary-500;
+  @apply font-normal text-accent-500;
 }
 
 body {
@@ -11,7 +11,7 @@ body {
 }
 
 p {
-  @apply text-secondary-500;
+  @apply text-accent-500;
 }
 
 .sarath {
