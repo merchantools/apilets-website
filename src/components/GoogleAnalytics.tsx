@@ -4,7 +4,13 @@ import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, Suspense } from 'react';
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || 'G-TGY5C43QP2';
+
+// Debug logging (remove after fixing)
+if (typeof window !== 'undefined') {
+  console.log('[GA Debug] Measurement ID:', GA_MEASUREMENT_ID);
+  console.log('[GA Debug] Environment:', process.env.NODE_ENV);
+}
 
 // Component that uses useSearchParams - must be wrapped in Suspense
 function AnalyticsTracker() {
@@ -16,7 +22,11 @@ function AnalyticsTracker() {
     if (pathname) {
       const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
 
+      console.log('[GA Debug] Tracking page view:', url);
+
       if (typeof window !== 'undefined' && (window as any).gtag) {
+        console.log('[GA Debug] gtag found, sending events');
+
         (window as any).gtag('config', GA_MEASUREMENT_ID, {
           page_path: url,
         });
@@ -27,6 +37,8 @@ function AnalyticsTracker() {
           page_title: document.title,
           page_location: window.location.href,
         });
+      } else {
+        console.warn('[GA Debug] gtag not available yet');
       }
     }
   }, [pathname, searchParams]);
@@ -37,8 +49,11 @@ function AnalyticsTracker() {
 export default function GoogleAnalytics() {
   // Don't load analytics in development unless explicitly enabled
   if (process.env.NODE_ENV === 'development' && !process.env.NEXT_PUBLIC_GA_DEBUG) {
+    console.log('[GA Debug] Disabled in development mode');
     return null;
   }
+
+  console.log('[GA Debug] Initializing Google Analytics with ID:', GA_MEASUREMENT_ID);
 
   return (
     <>
@@ -48,12 +63,19 @@ export default function GoogleAnalytics() {
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        onLoad={() => {
+          console.log('[GA Debug] gtag.js loaded successfully');
+        }}
+        onError={(e) => {
+          console.error('[GA Debug] Failed to load gtag.js:', e);
+        }}
       />
       <Script
         id="google-analytics"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
+            console.log('[GA Debug] Initializing dataLayer');
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -61,6 +83,7 @@ export default function GoogleAnalytics() {
               page_path: window.location.pathname,
               send_page_view: true
             });
+            console.log('[GA Debug] Initial config sent');
 
             // Track scroll depth
             let scrollDepth25 = false;
