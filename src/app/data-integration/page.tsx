@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // Configuration for Google Apps Script integration
 const FORM_CONFIG = {
@@ -118,10 +119,9 @@ const pipelineStages = [
 
 export default function DataIntegration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [submittedEmail, setSubmittedEmail] = useState<string>('');
   const [selectedTab, setSelectedTab] = useState<'visual' | 'advanced' | 'functions'>('visual');
+  const router = useRouter();
 
   // Track page view on mount
   useEffect(() => {
@@ -138,24 +138,12 @@ export default function DataIntegration() {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
-  // Auto-hide success message after configured duration
-  useEffect(() => {
-    if (submitStatus === 'success') {
-      const timer = setTimeout(() => {
-        setSubmitStatus('idle');
-      }, FORM_CONFIG.SUCCESS_MESSAGE_DURATION);
-      return () => clearTimeout(timer);
-    }
-  }, [submitStatus]);
-
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    setSubmitStatus('idle');
     setErrorMessage('');
 
     try {
@@ -172,20 +160,14 @@ export default function DataIntegration() {
       };
 
       // Submit to Google Apps Script
-      // Note: Using no-cors mode as required by Google Apps Script
       await fetch(FORM_CONFIG.GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Required for Google Apps Script
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),
       });
-
-      // Since no-cors doesn't allow reading response, assume success if no error thrown
-      setSubmittedEmail(data.email);
-      setSubmitStatus('success');
-      reset();
 
       // Track with Google Analytics if available
       if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -205,12 +187,14 @@ export default function DataIntegration() {
           page_path: '/data-integration',
         });
       }
+
+      // Redirect to thank you page with email parameter
+      router.push(`/thank-you?email=${encodeURIComponent(data.email)}`);
     } catch (error) {
       console.error('Form submission error:', error);
       setErrorMessage(
         'Connection failed. Please check your internet and try again.'
       );
-      setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
@@ -879,21 +863,7 @@ export default function DataIntegration() {
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-lg">
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg"
-                >
-                  <p className="text-green-800 font-semibold mb-2">✓ Thank you for registering!</p>
-                  <p className="text-green-700 text-sm">
-                    We've sent a verification email to <strong>{submittedEmail}</strong>.
-                    Please check your inbox (and spam folder) and click the verification link to complete your registration.
-                  </p>
-                </motion.div>
-              )}
-
-              {submitStatus === 'error' && (
+              {errorMessage && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
