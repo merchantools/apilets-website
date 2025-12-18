@@ -145,6 +145,28 @@ export default function GoogleAnalytics() {
           `,
         }}
       />
+      <Script
+        id="google-ads-conversion"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            // Google Ads conversion tracking helper
+            // Delays navigation until gtag event is sent
+            function gtagSendEvent(url) {
+              var callback = function () {
+                if (typeof url === 'string') {
+                  window.location = url;
+                }
+              };
+              gtag('event', 'ads_conversion_SUBMIT_LEAD_FORM_1', {
+                'event_callback': callback,
+                'event_timeout': 2000,
+              });
+              return false;
+            }
+          `,
+        }}
+      />
     </>
   );
 }

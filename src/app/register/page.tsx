@@ -100,8 +100,16 @@ export default function RegisterPage() {
         });
       }
 
-      // Redirect to thank you page with email parameter
-      router.push(`/thank-you?email=${encodeURIComponent(data.email)}`);
+      // Redirect to thank you page with email parameter using Google Ads conversion tracking
+      const thankYouUrl = `/thank-you?email=${encodeURIComponent(data.email)}`;
+
+      if (typeof window !== 'undefined' && (window as any).gtagSendEvent) {
+        // Use Google Ads conversion tracking with delayed navigation
+        (window as any).gtagSendEvent(thankYouUrl);
+      } else {
+        // Fallback to direct navigation if gtagSendEvent is not available
+        router.push(thankYouUrl);
+      }
 
     } catch (error) {
       console.error('Form submission error:', error);
